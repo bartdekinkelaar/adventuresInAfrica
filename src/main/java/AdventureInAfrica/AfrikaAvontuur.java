@@ -5,6 +5,11 @@ import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 
 public class AfrikaAvontuur extends GameEngine {
+	private Speler speler;
+	
+    // Deze regel maakt het makkelijker om te refereren naar je plaatjes.
+    public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
+    
 	public static void main(String[] args) {
 		AfrikaAvontuur hw = new AfrikaAvontuur();
 

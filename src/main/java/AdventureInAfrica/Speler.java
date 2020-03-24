@@ -1,6 +1,4 @@
 package AdventureInAfrica;
-
-import bart.tutorialworld.TutorialWorld;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
 
@@ -10,7 +8,7 @@ public class Speler extends SpriteObject {
 	public Speler(AfrikaAvontuur wereld) {
 		// Met `.concat()` plak je 2 strings aan elkaar.
 		// De methode returned een nieuwe String terug.
-//		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("vreek.png")));
+		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("vreek.png")));
 		this.wereld = wereld;
 	}
 
