@@ -106,4 +106,10 @@ public class AfrikaAvontuur extends GameEngine {
 	public void setLevensSpeler(int levens) {
 
 	}
+	public float getScore() {
+		return this.score;
+	}
+	public void setScore(float score) {
+		this.score = score;
+	}
 }
