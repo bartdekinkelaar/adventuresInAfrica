@@ -1,4 +1,5 @@
 package AdventureInAfrica;
+
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 
@@ -14,17 +15,19 @@ public class Speler extends SpriteObject {
 
 	@Override
 	public void update() {
-
+		if (getX() + getWidth() <= 0) {
+			setX(wereld.width);
+		}
 	}
 
 	public void keyPressed(int keyCode, char key) {
 		final int speed = 5;
 		if (keyCode == wereld.LEFT) {
-			System.out.println("Ik druk op de links knop");
+			System.out.println("Links: " + getX());
 			setDirectionSpeed(270, speed);
 		}
 		if (keyCode == wereld.RIGHT) {
-			System.out.println("Ik druk op de rechts knop");
+			System.out.println("Rechts: " + getX());
 			setDirectionSpeed(90, speed);
 		}
 	}
