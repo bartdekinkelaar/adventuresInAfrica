@@ -3,11 +3,11 @@ package AdventureInAfrica;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 
-public class NormaalAap extends SpriteObject implements IApen{
-	private float punten = 10;
+public class CoolAap extends SpriteObject implements IApen{
+	private float punten = 20;
 	private AfrikaAvontuur wereld;
 	
-	NormaalAap(AfrikaAvontuur wereld){
+	CoolAap(AfrikaAvontuur wereld){
 		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("Aap.png")));
 		this.wereld = wereld;
 	}

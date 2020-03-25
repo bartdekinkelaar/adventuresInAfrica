@@ -7,15 +7,20 @@ import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class AfrikaAvontuur extends GameEngine {
-	public ArrayList<IApen> apen;
+	public NormaalAap[] normaalApen;
+	public CoolAap[] coolApen;
+	public KabouterAap[] kabouterApen;
+	public WinterAap[] winterApen;
 	public ArrayList<Struik> struiken;
 	public ArrayList<Banaan> bananen;
 	public ArrayList<IPowerUp> powerUps;
 	public ArrayList<Poep> poep;
 	public Speler speler;
 	public int levensSpeler;
+	public int breedte = 1000;
+	public int hoogte = 700;
 	public String statusSpel;
-	public float score;
+	public float score = 0;
 	public long tijdPowerUpRapidActief;
 	public long laatsteTijdSchietenBanaan;
 	public long cooldownBanaan;
@@ -33,11 +38,12 @@ public class AfrikaAvontuur extends GameEngine {
 	// test
 	@Override
 	public void setupGame() {
-		int worldWidth = 500;
-		int worldHeight = 500;
-		TextObject to = new TextObject("Hello, World!", 40);
-		to.setForeColor(255, 255, 255, 255);
-		addGameObject(to, 100, 100);
+		this.normaalApen = new NormaalAap[6];
+		this.coolApen = new CoolAap[6];
+		this.kabouterApen = new KabouterAap[6];
+		this.winterApen = new WinterAap[6];
+		int worldWidth = breedte;
+		int worldHeight = hoogte;
 		maakGameObjectenAan();
 		View view = new View(worldWidth, worldHeight);
 		setView(view);
@@ -66,9 +72,22 @@ public class AfrikaAvontuur extends GameEngine {
 	}
 
 	private void maakApenAan() {
-
-	}
-
+		int n = -1;
+		for (int i = 0; i < 6; i++) {
+			this.normaalApen[i] = new NormaalAap(this);
+			this.coolApen[i] = new CoolAap(this);
+			this.kabouterApen[i] = new KabouterAap(this);
+			this.winterApen[i] = new WinterAap(this);
+		}
+			for (int k = 0; k < 6; k++) {
+				n++;
+				addGameObject(normaalApen[n], (breedte / 6) * k, 0);
+				addGameObject(coolApen[n], (breedte / 6) * k, (hoogte / 4 /3));
+				addGameObject(kabouterApen[n], (breedte / 6) * k, (hoogte / 4/3)*2);
+				addGameObject(winterApen[n], (breedte / 6) * k, (hoogte / 4/3)*3);
+			}
+		}
+	
 	private void maakStruikenAan() {
 
 	}
@@ -79,7 +98,7 @@ public class AfrikaAvontuur extends GameEngine {
 	}
 
 	// gebruikt wanneer een aap doodgaat
-	public void maakPowerUpAan(){
+	public void maakPowerUpAan() {
 	}
 
 	public void activeerPowerUpRapid() {
@@ -89,10 +108,6 @@ public class AfrikaAvontuur extends GameEngine {
 	// wordt aangeroepen door speler wss
 	public void schietBanaanAf() {
 
-	}
-
-	public ArrayList<IApen> getApen() {
-		return apen;
 	}
 
 	public Speler getSpeler() {
@@ -106,10 +121,43 @@ public class AfrikaAvontuur extends GameEngine {
 	public void setLevensSpeler(int levens) {
 
 	}
+
 	public float getScore() {
 		return this.score;
 	}
+
 	public void setScore(float score) {
 		this.score = score;
+	}
+	public NormaalAap[] getNormaalApen() {
+		return normaalApen;
+	}
+
+	public CoolAap[] getCoolApen() {
+		return coolApen;
+	}
+
+	public KabouterAap[] getKabouterApen() {
+		return kabouterApen;
+	}
+
+	public WinterAap[] getWinterApen() {
+		return winterApen;
+	}
+
+	public void setNormaalApen(NormaalAap[] normaalApen) {
+		this.normaalApen = normaalApen;
+	}
+
+	public void setCoolApen(CoolAap[] coolApen) {
+		this.coolApen = coolApen;
+	}
+
+	public void setKabouterApen(KabouterAap[] kabouterApen) {
+		this.kabouterApen = kabouterApen;
+	}
+
+	public void setWinterApen(WinterAap[] winterApen) {
+		this.winterApen = winterApen;
 	}
 }
