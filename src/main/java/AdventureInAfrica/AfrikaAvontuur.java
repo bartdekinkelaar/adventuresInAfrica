@@ -1,6 +1,8 @@
 package AdventureInAfrica;
 
 import nl.han.ica.oopg.engine.GameEngine;
+import nl.han.ica.oopg.objects.Sprite;
+import nl.han.ica.oopg.objects.SpriteObject;
 import nl.han.ica.oopg.view.View;
 import java.util.ArrayList;
 
@@ -24,6 +26,9 @@ public class AfrikaAvontuur extends GameEngine {
 	public long laatsteTijdSchietenBanaan;
 	public long cooldownBanaan;
 	public long cooldownPoep;
+	public Sprite logoImage;
+	public SpriteObject logo;
+	
 	// Deze regel maakt het makkelijker om te refereren naar je plaatjes.
 	public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
 
@@ -47,15 +52,17 @@ public class AfrikaAvontuur extends GameEngine {
 		View view = new View(worldWidth, worldHeight);
 		setView(view);
 		size(worldWidth, worldHeight);
+		this.logoImage = new Sprite(MEDIA_URL.concat("beginScherm_logo.png"));
 	}
 
 	@Override
 	public void update() {
-		// Dit doet nog niets }
+		// Dit doet nog niets
 	}
 
 	public void tekenStartscherm() {
-
+		logo = SpriteObject(logoImage);
+		addGameObject(this.logo, 0, 0);
 	}
 
 	public void tekenEindScherm() {
