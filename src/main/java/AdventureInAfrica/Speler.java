@@ -20,6 +20,7 @@ public class Speler extends SpriteObject {
 		}
 	}
 
+	@SuppressWarnings("static-access")
 	public void keyPressed(int keyCode, char key) {
 		final int speed = 5;
 		if (keyCode == wereld.LEFT) {

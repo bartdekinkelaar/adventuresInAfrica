@@ -1,7 +1,6 @@
 package AdventureInAfrica;
 
 import nl.han.ica.oopg.engine.GameEngine;
-import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ public class AfrikaAvontuur extends GameEngine {
 	public CoolAap[] coolApen;
 	public KabouterAap[] kabouterApen;
 	public WinterAap[] winterApen;
-	public ArrayList<Struik> struiken;
+	public Struik[] struiken;
 	public ArrayList<Banaan> bananen;
 	public ArrayList<IPowerUp> powerUps;
 	public ArrayList<Poep> poep;
@@ -89,7 +88,10 @@ public class AfrikaAvontuur extends GameEngine {
 		}
 	
 	private void maakStruikenAan() {
-
+		this.struiken = new Struik[3];
+		this.struiken[0] = new Struik(this,0,hoogte-(hoogte/3));
+		this.struiken[1] = new Struik(this,2*breedte/5,hoogte-(hoogte/3));
+		this.struiken[2] = new Struik(this,4*breedte/5,hoogte-(hoogte/3));
 	}
 
 	private void maakSpelerAan() {
@@ -114,12 +116,14 @@ public class AfrikaAvontuur extends GameEngine {
 		return speler;
 	}
 
-	public ArrayList<Struik> getStruiken() {
+	public Struik[] getStruiken() {
 		return struiken;
 	}
-
+	public int getLevensSpeler() {
+		return levensSpeler;
+	}
 	public void setLevensSpeler(int levens) {
-
+		this.levensSpeler = levens;
 	}
 
 	public float getScore() {
