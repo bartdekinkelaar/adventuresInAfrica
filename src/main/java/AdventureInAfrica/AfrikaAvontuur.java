@@ -1,4 +1,5 @@
 package AdventureInAfrica;
+
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.GameObject;
@@ -15,9 +16,6 @@ public class AfrikaAvontuur extends GameEngine {
 	public KabouterAap[] kabouterApen;
 	public WinterAap[] winterApen;
 	public Struik[] struiken;
-	public ArrayList<Banaan> bananen;
-	public ArrayList<IPowerUp> powerUps;
-	public ArrayList<Poep> poep;
 	public Speler speler;
 	public int highscoreSpeler;
 	public int levensSpeler;
@@ -34,7 +32,7 @@ public class AfrikaAvontuur extends GameEngine {
 	public SpriteObject logo;
 	public TextObject highscoreText;
 	public TextObject levensText;
-	
+
 	// Deze regel maakt het makkelijker om te refereren naar je plaatjes.
 	public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
 
@@ -100,17 +98,20 @@ public class AfrikaAvontuur extends GameEngine {
 			this.kabouterApen[i] = new KabouterAap(this);
 			this.winterApen[i] = new WinterAap(this);
 		}
-			for (int k = 0; k < 6; k++) {
-				n++;
-				addGameObject(normaalApen[n], (breedte / 6) * k, 0);
-				addGameObject(coolApen[n], (breedte / 6) * k, (hoogte / 4 /3));
-				addGameObject(kabouterApen[n], (breedte / 6) * k, (hoogte / 4/3)*2);
-				addGameObject(winterApen[n], (breedte / 6) * k, (hoogte / 4/3)*3);
-			}
+		for (int k = 0; k < 6; k++) {
+			n++;
+			addGameObject(normaalApen[n], (breedte / 6) * k, 0);
+			addGameObject(coolApen[n], (breedte / 6) * k, (hoogte / 4 / 3));
+			addGameObject(kabouterApen[n], (breedte / 6) * k, (hoogte / 4 / 3) * 2);
+			addGameObject(winterApen[n], (breedte / 6) * k, (hoogte / 4 / 3) * 3);
 		}
-	
+	}
+
 	private void maakStruikenAan() {
 		this.struiken = new Struik[3];
+		this.struiken[0] = new Struik(this, 0, (float) (hoogte - (hoogte / 2.1)));
+		this.struiken[1] = new Struik(this, 2 * breedte / 5, (float) (hoogte - (hoogte / 2.1)));
+		this.struiken[2] = new Struik(this, 4 * breedte / 5, (float) (hoogte - (hoogte / 2.1)));
 		this.struiken[0] = new Struik(this,0,(float) (hoogte-(hoogte/2.1)));
 		this.struiken[1] = new Struik(this,2*breedte/5,(float) (hoogte-(hoogte/2.1)));
 		this.struiken[2] = new Struik(this,4*breedte/5,(float) (hoogte-(hoogte/2.1)));
@@ -122,7 +123,17 @@ public class AfrikaAvontuur extends GameEngine {
 	}
 
 	// gebruikt wanneer een aap doodgaat
-	public void maakPowerUpAan() {
+	public void maakPowerUpAan(float x, float y) {
+		double random = Math.random();
+		if (random < 0.33) {
+			addGameObject(new PowerUpLevens(this),x,y);
+		}
+		if (random >= 0.33 && random < 0.66) {
+			addGameObject(new PowerUpStruik(this),x,y);
+		}
+		if (random >= 0.66) {
+			addGameObject(new PowerUpRapid(this),x,y);
+		}
 	}
 
 	public void activeerPowerUpRapid() {
@@ -141,9 +152,11 @@ public class AfrikaAvontuur extends GameEngine {
 	public Struik[] getStruiken() {
 		return struiken;
 	}
+
 	public int getLevensSpeler() {
 		return levensSpeler;
 	}
+
 	public void setLevensSpeler(int levens) {
 		this.levensSpeler = levens;
 	}
@@ -155,6 +168,7 @@ public class AfrikaAvontuur extends GameEngine {
 	public void setScore(float score) {
 		this.score = score;
 	}
+
 	public NormaalAap[] getNormaalApen() {
 		return normaalApen;
 	}
