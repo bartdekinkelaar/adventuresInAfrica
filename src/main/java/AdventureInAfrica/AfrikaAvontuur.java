@@ -1,6 +1,7 @@
 package AdventureInAfrica;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.engine.GameEngine;
+import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 import nl.han.ica.oopg.objects.TextObject;
@@ -18,6 +19,8 @@ public class AfrikaAvontuur extends GameEngine {
 	public ArrayList<IPowerUp> powerUps;
 	public ArrayList<Poep> poep;
 	public Speler speler;
+	public int veldWidth;
+	public int highscoreSpeler;
 	public int levensSpeler;
 	public int breedte = 1000;
 	public int hoogte = 700;
@@ -27,9 +30,11 @@ public class AfrikaAvontuur extends GameEngine {
 	public long laatsteTijdSchietenBanaan;
 	public long cooldownBanaan;
 	public long cooldownPoep;
+	public GameObject hartje;
 	public Sprite logoImage;
 	public SpriteObject logo;
-	public TextObject dashboardText;
+	public TextObject highscoreText;
+	public TextObject levensText;
 	
 	// Deze regel maakt het makkelijker om te refereren naar je plaatjes.
 	public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
@@ -48,15 +53,18 @@ public class AfrikaAvontuur extends GameEngine {
 		this.coolApen = new CoolAap[6];
 		this.kabouterApen = new KabouterAap[6];
 		this.winterApen = new WinterAap[6];
+		this.levensSpeler = 3;
+		this.highscoreSpeler = 0;
 		int worldWidth = breedte;
 		int worldHeight = hoogte;
 		
-		createDashboard(100, 100);
 		maakGameObjectenAan();
 		View view = new View(worldWidth, worldHeight);
 		setView(view);
+		view.setBackground(240, 240, 240);
 		size(worldWidth, worldHeight);
-		this.logoImage = new Sprite(MEDIA_URL.concat("Beginscherm_logo.png"));
+		tekenStartscherm(100, 100);
+		tekenInfoveld();
 	}
 
 	@Override
@@ -64,23 +72,27 @@ public class AfrikaAvontuur extends GameEngine {
 		// Dit doet nog niets
 	}
 
-	public void tekenStartscherm() {
-		TextObject testTekst = new TextObject("Welkom in de game guys", 33);
-		addGameObject(testTekst);
-		addGameObject(this.logo, 0, 0);
+	public void tekenStartscherm(int dashboardWidth, int dashboardHeight) {
+//        Dashboard startscherm = new Dashboard(2, 2, 200, 200);
+//        highscoreText = new TextObject("Highscore:", 18);
+//        startscherm.addGameObject(highscoreText);
+//        addDashboard(startscherm);
+	}
+	
+	public void tekenInfoveld() {
+		veldWidth = getWidth();
+		tekenHighscore();
+		tekenLevens();
+//        Dashboard highscore = new Dashboard(2, 2, width /3, 100);
+//        highscoreText = new TextObject("Highscore:", 18);
+//        levensText = new TextObject("Levens:" , 20);
+//        highscore.addGameObject(highscoreText);
+//        highscore.addGameObject(levensText);
+//        addDashboard(highscore);
 	}
 
 	public void tekenEindScherm() {
-
 	}
-	
-	private void createDashboard(int dashboardWidth, int dashboardHeight) {
-        Dashboard dashboard = new Dashboard(100,100, 100, 100);
-        dashboardText = new TextObject("welkom", 1);
-        dashboard.addGameObject(dashboardText);
-        addDashboard(dashboard);
-    }
-
 
 	// is hier zodat de setupgame niet te vol wordt
 	private void maakGameObjectenAan() {
@@ -116,7 +128,7 @@ public class AfrikaAvontuur extends GameEngine {
 
 	private void maakSpelerAan() {
 		this.speler = new Speler(this);
-		addGameObject(this.speler);
+		addGameObject(this.speler, 200, 200);
 	}
 
 	// gebruikt wanneer een aap doodgaat
@@ -184,8 +196,17 @@ public class AfrikaAvontuur extends GameEngine {
 	public void setWinterApen(WinterAap[] winterApen) {
 		this.winterApen = winterApen;
 	}
+	public void tekenHighscore() {
+		Dashboard highscore  = new Dashboard(2, 2, 152, 100);
+        highscoreText = new TextObject("Highscore:" + highscoreSpeler, 18);
+        highscore.addGameObject(highscoreText);
+        addDashboard(highscore);
+	}
 	
-//	private void refreshDasboardText() {
-//        dashboardText.setText("Bubbles popped: ");
-//    }
+	public void tekenLevens() {
+		Dashboard levens  = new Dashboard(100, 2, 250, 100);
+        levensText = new TextObject("Levens:" + levensSpeler, 20);
+        levens.addGameObject(levensText);
+        addDashboard(levens);
+	}
 }

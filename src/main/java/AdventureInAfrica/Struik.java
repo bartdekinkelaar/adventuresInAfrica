@@ -17,9 +17,9 @@ public class Struik extends GameObject{
 	@SuppressWarnings("static-access")
 	Struik(AfrikaAvontuur wereld, float x, float y){
 		this.wereld = wereld;
-		this.fstruik1 = new Sprite(wereld.MEDIA_URL.concat("struik1.png"));
-		this.fstruik2 = new Sprite(wereld.MEDIA_URL.concat("struik2.png"));
-		this.fstruik3 = new Sprite(wereld.MEDIA_URL.concat("struik3.png"));
+		this.fstruik1 = new Sprite(wereld.MEDIA_URL.concat("StruikEen.png"));
+		this.fstruik2 = new Sprite(wereld.MEDIA_URL.concat("StruikTwee.png"));
+		this.fstruik3 = new Sprite(wereld.MEDIA_URL.concat("StruikDrie.png"));
 		this.x = x;
 		this.y = y;
 		this.aantalKeerGeraakt = 0;
