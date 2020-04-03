@@ -8,7 +8,7 @@ public class NormaalAap extends SpriteObject implements IApen {
 	private AfrikaAvontuur wereld;
 	private boolean moveRight = true;
 	private float movement = 0;
-	private float speed = (float) 0.7;
+	private float speed = (float) 0.9;
 
 	NormaalAap(AfrikaAvontuur wereld) {
 		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("Aap.png")));
@@ -38,7 +38,7 @@ public class NormaalAap extends SpriteObject implements IApen {
 			this.x = this.x - this.speed;
 			this.movement = this.movement - this.speed;
 		}
-		if ((this.movement >= 50 && moveRight) || (this.movement <= 0 && !moveRight)) {
+		if ((this.movement >= (this.wereld.getWidth()/5)-(1.3*this.getWidth()) && moveRight) || (this.movement <= 0 && !moveRight)) {
 			moveRight = !moveRight;
 
 		}
