@@ -4,7 +4,6 @@ import nl.han.ica.oopg.objects.SpriteObject;
 
 public class Speler extends SpriteObject {
 	private AfrikaAvontuur wereld;
-
 	public Speler(AfrikaAvontuur wereld) {
 		// Met `.concat()` plak je 2 strings aan elkaar.
 		// De methode returned een nieuwe String terug.
@@ -21,7 +20,7 @@ public class Speler extends SpriteObject {
 			setX(0 - getWidth());
 		}
 	}
-
+	
 	@SuppressWarnings("static-access")
 	public void keyPressed(int keyCode, char key) {
 		final int speed = 5;
@@ -39,5 +38,9 @@ public class Speler extends SpriteObject {
 
 	public void updateLevens(int levensAantal) {
 		wereld.levensSpeler = levensAantal - 1;
+	}
+	
+    public void mousePressed(int x, int y, int button) {
+    	
 	}
 }

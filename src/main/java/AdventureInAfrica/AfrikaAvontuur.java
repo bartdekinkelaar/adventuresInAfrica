@@ -17,7 +17,6 @@ public class AfrikaAvontuur extends GameEngine {
 	public WinterAap[] winterApen;
 	public Struik[] struiken;
 	public Speler speler;
-	public int veldWidth;
 	public int highscoreSpeler;
 	public int levensSpeler;
 	public int breedte = 1000;
@@ -75,7 +74,6 @@ public class AfrikaAvontuur extends GameEngine {
 	}
 	
 	public void tekenInfoveld() {
-		veldWidth = getWidth();
 		tekenHighscore();
 		tekenLevens();
 	}
@@ -203,14 +201,14 @@ public class AfrikaAvontuur extends GameEngine {
 		this.winterApen = winterApen;
 	}
 	public void tekenHighscore() {
-		Dashboard highscore  = new Dashboard(2, 2, 152, 100);
+		Dashboard highscore  = new Dashboard(2, 2, 125, 100);
         highscoreText = new TextObject("Highscore:" + highscoreSpeler, 18);
         highscore.addGameObject(highscoreText);
         addDashboard(highscore);
 	}
 	
 	public void tekenLevens() {
-		Dashboard levens  = new Dashboard(100, 2, 250, 100);
+		Dashboard levens  = new Dashboard(100, 2, 200, 100);
         levensText = new TextObject("Levens:" + levensSpeler, 20);
         levens.addGameObject(levensText);
         addDashboard(levens);
