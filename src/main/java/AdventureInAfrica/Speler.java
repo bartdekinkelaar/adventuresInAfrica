@@ -18,18 +18,23 @@ public class Speler extends SpriteObject {
 		if (getX() + getWidth() <= 0) {
 			setX(wereld.width);
 		}
+		if(getX() + getWidth() > (wereld.width + getWidth())) {
+			setX(0 - getWidth());
+		}
 	}
 
 	@SuppressWarnings("static-access")
 	public void keyPressed(int keyCode, char key) {
 		final int speed = 5;
+		final int still = 0;
 		if (keyCode == wereld.LEFT) {
-			System.out.println("Links: " + getX());
 			setDirectionSpeed(270, speed);
 		}
 		if (keyCode == wereld.RIGHT) {
-			System.out.println("Rechts: " + getX());
 			setDirectionSpeed(90, speed);
+		}
+		if (keyCode == wereld.DOWN) {
+			setDirectionSpeed(still, still);
 		}
 	}
 }

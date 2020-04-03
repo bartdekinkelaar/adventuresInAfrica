@@ -1,8 +1,9 @@
 package AdventureInAfrica;
-
+import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
+import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ public class AfrikaAvontuur extends GameEngine {
 	public long cooldownPoep;
 	public Sprite logoImage;
 	public SpriteObject logo;
+	public TextObject dashboardText;
 	
 	// Deze regel maakt het makkelijker om te refereren naar je plaatjes.
 	public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
@@ -48,11 +50,13 @@ public class AfrikaAvontuur extends GameEngine {
 		this.winterApen = new WinterAap[6];
 		int worldWidth = breedte;
 		int worldHeight = hoogte;
+		
+		createDashboard(100, 100);
 		maakGameObjectenAan();
 		View view = new View(worldWidth, worldHeight);
 		setView(view);
 		size(worldWidth, worldHeight);
-		this.logoImage = new Sprite(MEDIA_URL.concat("beginScherm_logo.png"));
+		this.logoImage = new Sprite(MEDIA_URL.concat("Beginscherm_logo.png"));
 	}
 
 	@Override
@@ -61,13 +65,22 @@ public class AfrikaAvontuur extends GameEngine {
 	}
 
 	public void tekenStartscherm() {
-		logo = SpriteObject(logoImage);
+		TextObject testTekst = new TextObject("Welkom in de game guys", 33);
+		addGameObject(testTekst);
 		addGameObject(this.logo, 0, 0);
 	}
 
 	public void tekenEindScherm() {
 
 	}
+	
+	private void createDashboard(int dashboardWidth, int dashboardHeight) {
+        Dashboard dashboard = new Dashboard(100,100, 100, 100);
+        dashboardText = new TextObject("welkom", 1);
+        dashboard.addGameObject(dashboardText);
+        addDashboard(dashboard);
+    }
+
 
 	// is hier zodat de setupgame niet te vol wordt
 	private void maakGameObjectenAan() {
@@ -171,4 +184,8 @@ public class AfrikaAvontuur extends GameEngine {
 	public void setWinterApen(WinterAap[] winterApen) {
 		this.winterApen = winterApen;
 	}
+	
+//	private void refreshDasboardText() {
+//        dashboardText.setText("Bubbles popped: ");
+//    }
 }
