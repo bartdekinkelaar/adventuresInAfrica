@@ -30,7 +30,7 @@ public class Struik extends GameObject{
 	@Override
 	public void update() {
 		if(aantalKeerGeraakt == 0) {
-			this.struik = new StruikSprite(fstruik2);
+			this.struik = new StruikSprite(fstruik1);
 			wereld.addGameObject(this.struik,this.x,this.y);
 		}
 		if(aantalKeerGeraakt == 1) {

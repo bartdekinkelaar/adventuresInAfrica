@@ -73,22 +73,12 @@ public class AfrikaAvontuur extends GameEngine {
 	}
 
 	public void tekenStartscherm(int dashboardWidth, int dashboardHeight) {
-//        Dashboard startscherm = new Dashboard(2, 2, 200, 200);
-//        highscoreText = new TextObject("Highscore:", 18);
-//        startscherm.addGameObject(highscoreText);
-//        addDashboard(startscherm);
 	}
 	
 	public void tekenInfoveld() {
 		veldWidth = getWidth();
 		tekenHighscore();
 		tekenLevens();
-//        Dashboard highscore = new Dashboard(2, 2, width /3, 100);
-//        highscoreText = new TextObject("Highscore:", 18);
-//        levensText = new TextObject("Levens:" , 20);
-//        highscore.addGameObject(highscoreText);
-//        highscore.addGameObject(levensText);
-//        addDashboard(highscore);
 	}
 
 	public void tekenEindScherm() {
@@ -208,5 +198,9 @@ public class AfrikaAvontuur extends GameEngine {
         levensText = new TextObject("Levens:" + levensSpeler, 20);
         levens.addGameObject(levensText);
         addDashboard(levens);
+	}
+	
+	public void leegGame() {
+		
 	}
 }
