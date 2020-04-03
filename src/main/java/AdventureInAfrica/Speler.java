@@ -1,13 +1,11 @@
 package AdventureInAfrica;
-
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class Speler extends SpriteObject {
 	private AfrikaAvontuur wereld;
-	private Timer schietTimer;
+	public Timer schietTimer;
 	long start;
 	long end;
 	long nieuwSchot;
@@ -32,7 +30,7 @@ public class Speler extends SpriteObject {
 			setX(0 - getWidth());
 		}
 	}
-
+	
 	@SuppressWarnings("static-access")
 	public void keyPressed(int keyCode, char key) {
 		final int speed = 5;
