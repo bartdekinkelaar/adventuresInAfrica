@@ -11,7 +11,7 @@ public class KabouterAap extends SpriteObject implements IApen {
 	private float speed = (float) 0.9;
 
 	KabouterAap(AfrikaAvontuur wereld) {
-		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("Aap.png")));
+		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("KabouterAap.png")));
 		this.wereld = wereld; 
 	}
 

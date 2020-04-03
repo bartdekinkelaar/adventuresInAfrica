@@ -102,10 +102,10 @@ public class AfrikaAvontuur extends GameEngine {
 		}
 		for (int k = 0; k < 6; k++) {
 			n++;
-			addGameObject(normaalApen[n], (breedte / 6) * k, 0);
-			addGameObject(coolApen[n], (breedte / 6) * k, (hoogte / 4 / 3));
-			addGameObject(kabouterApen[n], (breedte / 6) * k, (hoogte / 4 / 3) * 2);
-			addGameObject(winterApen[n], (breedte / 6) * k, (hoogte / 4 / 3) * 3);
+			addGameObject(winterApen[n], (breedte / 6) * k, 0);
+			addGameObject(kabouterApen[n], (breedte / 6) * k, (hoogte / 3 / 3));
+			addGameObject(coolApen[n], (breedte / 6) * k, (hoogte / 3 / 3) * 2);
+			addGameObject(normaalApen[n], (breedte / 6) * k, (hoogte / 3 / 3) * 3);
 		}
 	}
 
