@@ -1,5 +1,4 @@
 package AdventureInAfrica;
-
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 
@@ -36,5 +35,9 @@ public class Speler extends SpriteObject {
 		if (keyCode == wereld.DOWN) {
 			setDirectionSpeed(still, still);
 		}
+	}
+
+	public void updateLevens(int levensAantal) {
+		wereld.levensSpeler = levensAantal - 1;
 	}
 }

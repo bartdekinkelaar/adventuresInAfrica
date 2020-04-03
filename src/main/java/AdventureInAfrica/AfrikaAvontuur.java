@@ -51,12 +51,19 @@ public class AfrikaAvontuur extends GameEngine {
 		this.coolApen = new CoolAap[6];
 		this.kabouterApen = new KabouterAap[6];
 		this.winterApen = new WinterAap[6];
+		this.levensSpeler = 3;
+		this.highscoreSpeler = 0;
+		
 		int worldWidth = breedte;
 		int worldHeight = hoogte;
+		
 		maakGameObjectenAan();
 		View view = new View(worldWidth, worldHeight);
 		setView(view);
+		view.setBackground(240, 240, 240);
 		size(worldWidth, worldHeight);
+		tekenStartscherm(100, 100);
+		tekenInfoveld();
 	}
 
 	@Override
@@ -64,10 +71,15 @@ public class AfrikaAvontuur extends GameEngine {
 		// Dit doet nog niets }
 	}
 
-	public void tekenStartscherm() {
-
+	public void tekenStartscherm(int dashboardWidth, int dashboardHeight) {
 	}
-
+	
+	public void tekenInfoveld() {
+		veldWidth = getWidth();
+		tekenHighscore();
+		tekenLevens();
+	}
+	
 	public void tekenEindScherm() {
 
 	}
@@ -102,11 +114,14 @@ public class AfrikaAvontuur extends GameEngine {
 		this.struiken[0] = new Struik(this, 0, (float) (hoogte - (hoogte / 2.1)));
 		this.struiken[1] = new Struik(this, 2 * breedte / 5, (float) (hoogte - (hoogte / 2.1)));
 		this.struiken[2] = new Struik(this, 4 * breedte / 5, (float) (hoogte - (hoogte / 2.1)));
+		this.struiken[0] = new Struik(this,0,(float) (hoogte-(hoogte/2.1)));
+		this.struiken[1] = new Struik(this,2*breedte/5,(float) (hoogte-(hoogte/2.1)));
+		this.struiken[2] = new Struik(this,4*breedte/5,(float) (hoogte-(hoogte/2.1)));
 	}
 
 	private void maakSpelerAan() {
 		this.speler = new Speler(this);
-		addGameObject(this.speler);
+		addGameObject(this.speler, breedte - (breedte / 2) - (this.getWidth()), hoogte - (hoogte / 4));
 	}
 
 	// gebruikt wanneer een aap doodgaat
@@ -199,5 +214,9 @@ public class AfrikaAvontuur extends GameEngine {
         levensText = new TextObject("Levens:" + levensSpeler, 20);
         levens.addGameObject(levensText);
         addDashboard(levens);
+	}
+	
+	public void leegGame() {
+		
 	}
 }
