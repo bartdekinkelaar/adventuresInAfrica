@@ -23,7 +23,7 @@ public class AfrikaAvontuur extends GameEngine {
 	public int highscoreSpeler;
 	public int levensSpeler;
 	public int breedte = 1000;
-	public int hoogte = 700;
+	public int hoogte = 800;
 	public String statusSpel;
 	public float score = 0;
 	public long tijdPowerUpRapidActief;
@@ -121,14 +121,14 @@ public class AfrikaAvontuur extends GameEngine {
 	
 	private void maakStruikenAan() {
 		this.struiken = new Struik[3];
-		this.struiken[0] = new Struik(this,0,hoogte-(hoogte/3));
-		this.struiken[1] = new Struik(this,2*breedte/5,hoogte-(hoogte/3));
-		this.struiken[2] = new Struik(this,4*breedte/5,hoogte-(hoogte/3));
+		this.struiken[0] = new Struik(this,0,(float) (hoogte-(hoogte/2.1)));
+		this.struiken[1] = new Struik(this,2*breedte/5,(float) (hoogte-(hoogte/2.1)));
+		this.struiken[2] = new Struik(this,4*breedte/5,(float) (hoogte-(hoogte/2.1)));
 	}
 
 	private void maakSpelerAan() {
 		this.speler = new Speler(this);
-		addGameObject(this.speler, 200, 200);
+		addGameObject(this.speler, breedte - (breedte / 2) - (this.getWidth()), hoogte - (hoogte / 4));
 	}
 
 	// gebruikt wanneer een aap doodgaat
