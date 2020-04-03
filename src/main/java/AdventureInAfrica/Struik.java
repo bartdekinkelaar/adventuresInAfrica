@@ -4,7 +4,7 @@ import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import processing.core.PGraphics;
 
-public class Struik extends GameObject{
+public class Struik extends GameObject {
 	AfrikaAvontuur wereld;
 	private StruikSprite struik;
 	private Sprite fstruik1;
@@ -13,9 +13,9 @@ public class Struik extends GameObject{
 	public int aantalKeerGeraakt;
 	private float x;
 	private float y;
-	
+
 	@SuppressWarnings("static-access")
-	Struik(AfrikaAvontuur wereld, float x, float y){
+	Struik(AfrikaAvontuur wereld, float x, float y) {
 		this.wereld = wereld;
 		this.fstruik1 = new Sprite(wereld.MEDIA_URL.concat("StruikEen.png"));
 		this.fstruik2 = new Sprite(wereld.MEDIA_URL.concat("StruikTwee.png"));
@@ -24,40 +24,42 @@ public class Struik extends GameObject{
 		this.y = y;
 		this.aantalKeerGeraakt = 0;
 		this.struik = new StruikSprite(fstruik1);
-		wereld.addGameObject(this.struik,this.x,this.y);
+		wereld.addGameObject(this.struik, this.x, this.y);
 	}
 
 	@Override
 	public void update() {
-		if(aantalKeerGeraakt == 0) {
+		if (aantalKeerGeraakt == 0) {
 			this.struik = new StruikSprite(fstruik1);
-			wereld.addGameObject(this.struik,this.x,this.y);
+			wereld.addGameObject(this.struik, this.x, this.y);
 		}
-		if(aantalKeerGeraakt == 1) {
+		if (aantalKeerGeraakt == 1) {
 			wereld.deleteGameObject(this.struik);
 			this.struik = new StruikSprite(fstruik2);
-			wereld.addGameObject(this.struik,this.x,this.y);
+			wereld.addGameObject(this.struik, this.x, this.y);
 		}
-		if(aantalKeerGeraakt == 2) {
+		if (aantalKeerGeraakt == 2) {
 			wereld.deleteGameObject(this.struik);
 			this.struik = new StruikSprite(fstruik3);
-			wereld.addGameObject(this.struik,this.x,this.y);
+			wereld.addGameObject(this.struik, this.x, this.y);
 		}
-		if(aantalKeerGeraakt == 3) {
+		if (aantalKeerGeraakt == 3) {
 			wereld.deleteGameObject(this.struik);
 		}
-		if(aantalKeerGeraakt > 3) {
+		if (aantalKeerGeraakt > 3) {
 		}
 	}
 
 	@Override
 	public void draw(PGraphics g) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	public void refresh() {
-        aantalKeerGeraakt = 0;
-    }
+		aantalKeerGeraakt = 0;
+	}
+
 	public void wordtGeraakt() {
 		aantalKeerGeraakt++;
 	}

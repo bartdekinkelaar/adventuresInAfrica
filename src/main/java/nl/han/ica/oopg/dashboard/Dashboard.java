@@ -183,7 +183,6 @@ public class Dashboard extends GameObject {
      * @param gameObject The GameObject that should be deleted
      */
     public void deleteGameObject(GameObject gameObject) {
-
         gameObjects.remove(gameObject);
     }
 
@@ -191,7 +190,6 @@ public class Dashboard extends GameObject {
      * Deletes all GameObjects from the dashboard.
      */
     public void deleteAllDashboardObjects() {
-
         gameObjects.removeAllElements();
     }
 
@@ -215,7 +213,6 @@ public class Dashboard extends GameObject {
      * @param b Blue value of the background
      */
     public void setBackground(Integer r, Integer g, Integer b) {
-
         backgroundR = r;
         backgroundG = g;
         backgroundB = b;

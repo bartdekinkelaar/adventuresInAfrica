@@ -1,5 +1,4 @@
 package AdventureInAfrica;
-
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 
@@ -40,7 +39,6 @@ public class CoolAap extends SpriteObject implements IApen {
 		}
 		if ((this.movement >= (this.wereld.getWidth()/5)-(1.3*this.getWidth()) && moveRight) || (this.movement <= 0 && !moveRight)) {
 			moveRight = !moveRight;
-
 		}
 	}
 }
