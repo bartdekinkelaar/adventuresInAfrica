@@ -55,6 +55,7 @@ public class AfrikaAvontuur extends GameEngine {
 		this.winterApen = new WinterAap[6];
 		this.levensSpeler = 3;
 		this.highscoreSpeler = 0;
+		
 		int worldWidth = breedte;
 		int worldHeight = hoogte;
 		
@@ -69,7 +70,7 @@ public class AfrikaAvontuur extends GameEngine {
 
 	@Override
 	public void update() {
-		// Dit doet nog niets
+		// Dit doet nog niets }
 	}
 
 	public void tekenStartscherm(int dashboardWidth, int dashboardHeight) {
@@ -80,8 +81,9 @@ public class AfrikaAvontuur extends GameEngine {
 		tekenHighscore();
 		tekenLevens();
 	}
-
+	
 	public void tekenEindScherm() {
+
 	}
 
 	// is hier zodat de setupgame niet te vol wordt
