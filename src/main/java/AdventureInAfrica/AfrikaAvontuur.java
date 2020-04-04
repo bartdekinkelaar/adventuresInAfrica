@@ -84,7 +84,6 @@ public class AfrikaAvontuur extends GameEngine {
 	public void tekenInfoveld() {
 		tekenHighscore();
 		tekenLevens();
-		tekenEindscherm();
 	}
 
 	// is hier zodat de setupgame niet te vol wordt
@@ -224,15 +223,14 @@ public class AfrikaAvontuur extends GameEngine {
 	}
 
 	public void tekenEindscherm() {
-		leegGame();
-		Dashboard eindscherm = new Dashboard(200, 200, 250, 20);
-		eindText = new TextObject("ScoreZ:" + this.score, 18);
+		Dashboard eindscherm = new Dashboard(175, 150, 600, 200);
+		eindText = new TextObject("Eindscore:" + this.score, 48);
 		eindscherm.addGameObject(eindText);
 		addDashboard(eindscherm);
 	}
 
 	public void leegGame() {
 		deleteAllGameOBjects();
+		tekenEindscherm();
 	}
-
 }
