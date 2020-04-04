@@ -52,6 +52,7 @@ public class CoolAap extends SpriteObject implements IApen, ICollidableWithGameO
 				wereld.deleteGameObject(go);
 				this.geraaktActie();
 				wereld.deleteGameObject(this);
+				wereld.aantalApen = wereld.aantalApen - 1;
 			}
 		}
 	}

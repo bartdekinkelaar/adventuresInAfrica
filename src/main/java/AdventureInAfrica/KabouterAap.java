@@ -53,6 +53,7 @@ public class KabouterAap extends SpriteObject implements IApen, ICollidableWithG
 				wereld.deleteGameObject(go);
 				this.geraaktActie();
 				wereld.deleteGameObject(this);
+				wereld.aantalApen = wereld.aantalApen - 1;
 			}
 		}
 	}

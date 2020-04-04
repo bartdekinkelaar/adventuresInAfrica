@@ -54,6 +54,7 @@ public class NormaalAap extends SpriteObject implements IApen, ICollidableWithGa
 				wereld.deleteGameObject(go);
 				this.geraaktActie();
 				wereld.deleteGameObject(this);
+				wereld.aantalApen = wereld.aantalApen - 1;
 			}
 		}
 	}

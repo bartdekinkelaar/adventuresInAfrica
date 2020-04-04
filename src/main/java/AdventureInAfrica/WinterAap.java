@@ -54,6 +54,7 @@ public class WinterAap extends SpriteObject implements IApen, ICollidableWithGam
 				wereld.deleteGameObject(go);
 				this.geraaktActie();
 				wereld.deleteGameObject(this);
+				wereld.aantalApen = wereld.aantalApen - 1;
 			}
 		}
 	}
