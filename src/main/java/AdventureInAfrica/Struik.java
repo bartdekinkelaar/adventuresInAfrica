@@ -26,31 +26,13 @@ public class Struik extends GameObject implements ICollidableWithGameObjects{
 		this.x = x;
 		this.y = y;
 		this.aantalKeerGeraakt = 0;
-		this.struik = new StruikSprite(fstruik1);
+		this.struik = new StruikSprite(fstruik1,this);
 		wereld.addGameObject(this.struik, this.x, this.y);
 	}
 
 	@Override
 	public void update() {
-		if (aantalKeerGeraakt == 0) {
-			this.struik = new StruikSprite(fstruik1);
-			wereld.addGameObject(this.struik, this.x, this.y);
-		}
-		if (aantalKeerGeraakt == 1) {
-			wereld.deleteGameObject(this.struik);
-			this.struik = new StruikSprite(fstruik2);
-			wereld.addGameObject(this.struik, this.x, this.y);
-		}
-		if (aantalKeerGeraakt == 2) {
-			wereld.deleteGameObject(this.struik);
-			this.struik = new StruikSprite(fstruik3);
-			wereld.addGameObject(this.struik, this.x, this.y);
-		}
-		if (aantalKeerGeraakt == 3) {
-			wereld.deleteGameObject(this.struik);
-		}
-		if (aantalKeerGeraakt > 3) {
-		}
+		
 	}
 
 	@Override
@@ -64,6 +46,25 @@ public class Struik extends GameObject implements ICollidableWithGameObjects{
 
 	public void wordtGeraakt() {
 		aantalKeerGeraakt++;
+		if (aantalKeerGeraakt == 0) {
+			this.struik = new StruikSprite(fstruik1,this);
+			wereld.addGameObject(this.struik, this.x, this.y);
+		}
+		if (aantalKeerGeraakt == 1) {
+			wereld.deleteGameObject(this.struik);
+			this.struik = new StruikSprite(fstruik2,this);
+			wereld.addGameObject(this.struik, this.x, this.y);
+		}
+		if (aantalKeerGeraakt == 2) {
+			wereld.deleteGameObject(this.struik);
+			this.struik = new StruikSprite(fstruik3,this);
+			wereld.addGameObject(this.struik, this.x, this.y);
+		}
+		if (aantalKeerGeraakt == 3) {
+			wereld.deleteGameObject(this.struik);
+		}
+		if (aantalKeerGeraakt > 3) {
+		}
 	}
 
 	@Override
@@ -72,6 +73,7 @@ public class Struik extends GameObject implements ICollidableWithGameObjects{
 			if (go instanceof Poep) {
 				this.wordtGeraakt();
 				wereld.deleteGameObject(go);
+				System.out.println("tt");
 			}
 		}
 	}

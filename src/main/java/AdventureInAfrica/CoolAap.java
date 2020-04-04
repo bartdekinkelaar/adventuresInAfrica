@@ -21,6 +21,7 @@ public class CoolAap extends SpriteObject implements IApen, ICollidableWithGameO
 	@Override
 	public void geraaktActie() {
 		telPuntenOp();
+		removeFromArray();
 		double random = Math.random();
 		if (random < 0.33) {
 			wereld.maakPowerUpAan(this.x, this.y);
@@ -30,7 +31,15 @@ public class CoolAap extends SpriteObject implements IApen, ICollidableWithGameO
 	public void telPuntenOp() {
 		this.wereld.setScore(this.wereld.getScore() + this.punten);
 	}
-
+	
+	private void removeFromArray() {                               
+		for (int i = 0; i < wereld.getCoolApen().length; i++) { 
+			if (wereld.getCoolApen()[i] == this) {              
+				wereld.getCoolApen()[i] = null;                 
+			}                                                      
+		}                                                          
+	}  
+	
 	@Override
 	public void update() {
 		if (moveRight) {
@@ -52,7 +61,6 @@ public class CoolAap extends SpriteObject implements IApen, ICollidableWithGameO
 				wereld.deleteGameObject(go);
 				this.geraaktActie();
 				wereld.deleteGameObject(this);
-				wereld.aantalApen = wereld.aantalApen - 1;
 			}
 		}
 	}

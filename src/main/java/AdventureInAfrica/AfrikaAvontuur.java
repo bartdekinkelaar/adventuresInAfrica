@@ -7,8 +7,10 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @SuppressWarnings("serial")
 public class AfrikaAvontuur extends GameEngine {
@@ -49,18 +51,17 @@ public class AfrikaAvontuur extends GameEngine {
 		hw.runSketch();
 	}
 
+	// test
 	@Override
 	public void setupGame() {
-		this.apenPerRij = 6;
-		this.normaalApen = new NormaalAap[apenPerRij];
-		this.coolApen = new CoolAap[apenPerRij];
-		this.kabouterApen = new KabouterAap[apenPerRij];
-		this.winterApen = new WinterAap[apenPerRij];
+		this.normaalApen = new NormaalAap[6];
+		this.coolApen = new CoolAap[6];
+		this.kabouterApen = new KabouterAap[6];
+		this.winterApen = new WinterAap[6];
 		this.levensSpeler = 3;
-		this.scoreSpeler = 0;
+		this.highscoreSpeler = 0;
 		this.schietSnelheid = 500;
 		this.barHoogte = 25;
-		this.aantalApen = apenPerRij * 4;
 		
 		int worldWidth = breedte;
 		int worldHeight = hoogte;
@@ -76,11 +77,13 @@ public class AfrikaAvontuur extends GameEngine {
 	@Override
 	public void update() {
 		this.updateHighscore();
+		this.updateLevens();
+		this.genereerPoep();
 		if (aantalApen == 0) {
 			leegGame();
 		}
 	}
-
+	
 	public void tekenInfoveld() {
 		tekenHighscore();
 		tekenLevens();
@@ -116,9 +119,9 @@ public class AfrikaAvontuur extends GameEngine {
 		this.struiken[0] = new Struik(this, 0, (float) (hoogte - (hoogte / 2.1)));
 		this.struiken[1] = new Struik(this, 2 * breedte / 5, (float) (hoogte - (hoogte / 2.1)));
 		this.struiken[2] = new Struik(this, 4 * breedte / 5, (float) (hoogte - (hoogte / 2.1)));
-		this.struiken[0] = new Struik(this, 0, (float) (hoogte - (hoogte / 2.1)));
-		this.struiken[1] = new Struik(this, 2 * breedte / 5, (float) (hoogte - (hoogte / 2.1)));
-		this.struiken[2] = new Struik(this, 4 * breedte / 5, (float) (hoogte - (hoogte / 2.1)));
+		this.struiken[0] = new Struik(this,0,(float) (hoogte-(hoogte/2.1)));
+		this.struiken[1] = new Struik(this,2*breedte/5,(float) (hoogte-(hoogte/2.1)));
+		this.struiken[2] = new Struik(this,4*breedte/5,(float) (hoogte-(hoogte/2.1)));
 	}
 
 	private void maakSpelerAan() {
@@ -203,18 +206,18 @@ public class AfrikaAvontuur extends GameEngine {
 	public void setWinterApen(WinterAap[] winterApen) {
 		this.winterApen = winterApen;
 	}
-
+	
 	public void tekenHighscore() {
-		Dashboard score = new Dashboard(0, 0, 120, barHoogte);
-		scoreText = new TextObject("Score: " + this.score, 18);
-		score.addGameObject(scoreText);
-		addDashboard(score);
+		Dashboard highscore  = new Dashboard(0, 0, 120, barHoogte);
+        highscoreText = new TextObject("Score: " + this.score, 18);
+        highscore.addGameObject(highscoreText);
+        addDashboard(highscore);
 	}
-
+	
 	public void updateHighscore() {
-		scoreText.setText("Score: " + this.score);
+		highscoreText.setText("Score: " + this.score);
 	}
-
+	
 	public void tekenLevens() {
 		Dashboard levens = new Dashboard(75, 0, 200, barHoogte);
 		levensText = new TextObject("Levens:" + levensSpeler, 18);
@@ -228,7 +231,7 @@ public class AfrikaAvontuur extends GameEngine {
 		eindscherm.addGameObject(eindText);
 		addDashboard(eindscherm);
 	}
-
+	
 	public void leegGame() {
 		deleteAllGameOBjects();
 		tekenEindscherm();

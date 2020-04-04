@@ -22,8 +22,17 @@ public class NormaalAap extends SpriteObject implements IApen, ICollidableWithGa
 	@Override
 	public void geraaktActie() {
 		telPuntenOp();
+		removeFromArray();
 		wereld.maakPowerUpAan(this.x, this.y);
 
+	}
+
+	private void removeFromArray() {
+		for (int i = 0; i < wereld.getNormaalApen().length; i++) {
+			if (wereld.getNormaalApen()[i] == this) {
+				wereld.getNormaalApen()[i] = null;
+			}
+		}
 	}
 
 	public void telPuntenOp() {
@@ -54,7 +63,6 @@ public class NormaalAap extends SpriteObject implements IApen, ICollidableWithGa
 				wereld.deleteGameObject(go);
 				this.geraaktActie();
 				wereld.deleteGameObject(this);
-				wereld.aantalApen = wereld.aantalApen - 1;
 			}
 		}
 	}
