@@ -1,9 +1,12 @@
 package AdventureInAfrica;
+import java.util.List;
 
+import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
+import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 
-public class CoolAap extends SpriteObject implements IApen {
+public class CoolAap extends SpriteObject implements IApen, ICollidableWithGameObjects {
 	private float punten = 20;
 	private AfrikaAvontuur wereld;
 	private boolean moveRight = true;
@@ -40,7 +43,16 @@ public class CoolAap extends SpriteObject implements IApen {
 		}
 		if ((this.movement >= (this.wereld.getWidth()/5)-(1.3*this.getWidth()) && moveRight) || (this.movement <= 0 && !moveRight)) {
 			moveRight = !moveRight;
-
+		}
+	}
+	@Override
+	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
+		for (GameObject go : collidedGameObjects) {
+			if (go instanceof Banaan) {
+				wereld.deleteGameObject(go);
+				this.geraaktActie();
+				wereld.deleteGameObject(this);
+			}
 		}
 	}
 }

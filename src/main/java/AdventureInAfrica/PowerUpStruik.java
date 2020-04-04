@@ -9,7 +9,6 @@ import processing.core.PGraphics;
 
 public class PowerUpStruik extends SpriteObject implements ICollidableWithGameObjects, IPowerUp{
 	private AfrikaAvontuur wereld;
-
 	
 	public PowerUpStruik(AfrikaAvontuur wereld) {
 		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("struik1.png")));
@@ -19,14 +18,12 @@ public class PowerUpStruik extends SpriteObject implements ICollidableWithGameOb
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void draw(PGraphics g) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -45,5 +42,4 @@ public class PowerUpStruik extends SpriteObject implements ICollidableWithGameOb
 		this.wereld.getStruiken()[2].refresh();
 		this.wereld.deleteGameObject(this);
 	}
-
 }

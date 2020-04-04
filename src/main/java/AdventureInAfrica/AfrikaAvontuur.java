@@ -32,6 +32,8 @@ public class AfrikaAvontuur extends GameEngine {
 	public SpriteObject logo;
 	public TextObject highscoreText;
 	public TextObject levensText;
+	public int schietSnelheid;
+	public int barHoogte;
 
 	// Deze regel maakt het makkelijker om te refereren naar je plaatjes.
 	public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
@@ -52,6 +54,8 @@ public class AfrikaAvontuur extends GameEngine {
 		this.winterApen = new WinterAap[6];
 		this.levensSpeler = 3;
 		this.highscoreSpeler = 0;
+		this.schietSnelheid = 500;
+		this.barHoogte = 25;
 		
 		int worldWidth = breedte;
 		int worldHeight = hoogte;
@@ -61,25 +65,17 @@ public class AfrikaAvontuur extends GameEngine {
 		setView(view);
 		view.setBackground(240, 240, 240);
 		size(worldWidth, worldHeight);
-		tekenStartscherm(100, 100);
 		tekenInfoveld();
 	}
 
 	@Override
 	public void update() {
-		// Dit doet nog niets }
-	}
-
-	public void tekenStartscherm(int dashboardWidth, int dashboardHeight) {
+		this.updateHighscore();
 	}
 	
 	public void tekenInfoveld() {
 		tekenHighscore();
 		tekenLevens();
-	}
-	
-	public void tekenEindScherm() {
-
 	}
 
 	// is hier zodat de setupgame niet te vol wordt
@@ -119,7 +115,7 @@ public class AfrikaAvontuur extends GameEngine {
 
 	private void maakSpelerAan() {
 		this.speler = new Speler(this);
-		addGameObject(this.speler, breedte - (breedte / 2) - (this.getWidth()), hoogte - (hoogte / 4));
+		addGameObject(this.speler, breedte - (breedte / 2) - (this.getWidth()), hoogte - (hoogte / 4) - barHoogte);
 	}
 
 	// gebruikt wanneer een aap doodgaat
@@ -200,21 +196,26 @@ public class AfrikaAvontuur extends GameEngine {
 	public void setWinterApen(WinterAap[] winterApen) {
 		this.winterApen = winterApen;
 	}
+	
 	public void tekenHighscore() {
-		Dashboard highscore  = new Dashboard(2, 2, 125, 100);
-        highscoreText = new TextObject("Highscore:" + highscoreSpeler, 18);
+		Dashboard highscore  = new Dashboard(0, 0, 120, barHoogte);
+        highscoreText = new TextObject("Score: " + this.score, 18);
         highscore.addGameObject(highscoreText);
         addDashboard(highscore);
 	}
 	
+	public void updateHighscore() {
+		highscoreText.setText("Score: " + this.score);
+	}
+	
 	public void tekenLevens() {
-		Dashboard levens  = new Dashboard(100, 2, 200, 100);
-        levensText = new TextObject("Levens:" + levensSpeler, 20);
+		Dashboard levens  = new Dashboard(75, 0, 200, barHoogte);
+        levensText = new TextObject("Levens:" + levensSpeler, 18);
         levens.addGameObject(levensText);
         addDashboard(levens);
 	}
 	
 	public void leegGame() {
-		
+		deleteAllGameOBjects();
 	}
 }
