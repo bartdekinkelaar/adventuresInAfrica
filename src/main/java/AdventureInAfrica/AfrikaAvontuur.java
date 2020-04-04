@@ -20,7 +20,7 @@ public class AfrikaAvontuur extends GameEngine {
 	public WinterAap[] winterApen;
 	public Struik[] struiken;
 	public Speler speler;
-	public int highscoreSpeler;
+	public int scoreSpeler;
 	public int levensSpeler;
 	public int breedte = 1000;
 	public int hoogte = 800;
@@ -33,10 +33,13 @@ public class AfrikaAvontuur extends GameEngine {
 	public GameObject hartje;
 	public Sprite logoImage;
 	public SpriteObject logo;
-	public TextObject highscoreText;
+	public TextObject scoreText;
 	public TextObject levensText;
+	public TextObject eindText;
 	public int schietSnelheid;
 	public int barHoogte;
+	public int apenPerRij;
+	public int aantalApen;
 
 	// Deze regel maakt het makkelijker om te refereren naar je plaatjes.
 	public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
@@ -76,11 +79,15 @@ public class AfrikaAvontuur extends GameEngine {
 		this.updateHighscore();
 		this.updateLevens();
 		this.genereerPoep();
+		if (aantalApen == 0) {
+			leegGame();
+		}
 	}
 	
 	public void tekenInfoveld() {
 		tekenHighscore();
 		tekenLevens();
+		tekenEindscherm();
 	}
 
 	// is hier zodat de setupgame niet te vol wordt
@@ -93,18 +100,18 @@ public class AfrikaAvontuur extends GameEngine {
 
 	private void maakApenAan() {
 		int n = -1;
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < apenPerRij; i++) {
 			this.normaalApen[i] = new NormaalAap(this);
 			this.coolApen[i] = new CoolAap(this);
 			this.kabouterApen[i] = new KabouterAap(this);
 			this.winterApen[i] = new WinterAap(this);
 		}
-		for (int k = 0; k < 6; k++) {
+		for (int k = 0; k < apenPerRij; k++) {
 			n++;
-			addGameObject(winterApen[n], (breedte / 6) * k, 0);
-			addGameObject(kabouterApen[n], (breedte / 6) * k, (hoogte / 3 / 3));
-			addGameObject(coolApen[n], (breedte / 6) * k, (hoogte / 3 / 3) * 2);
-			addGameObject(normaalApen[n], (breedte / 6) * k, (hoogte / 3 / 3) * 3);
+			addGameObject(winterApen[n], (breedte / apenPerRij) * k, 0);
+			addGameObject(kabouterApen[n], (breedte / apenPerRij) * k, (hoogte / 3 / 3));
+			addGameObject(coolApen[n], (breedte / apenPerRij) * k, (hoogte / 3 / 3) * 2);
+			addGameObject(normaalApen[n], (breedte / apenPerRij) * k, (hoogte / 3 / 3) * 3);
 		}
 	}
 
@@ -125,7 +132,8 @@ public class AfrikaAvontuur extends GameEngine {
 
 	// gebruikt wanneer een aap doodgaat
 	public void maakPowerUpAan(float x, float y) {
-			this.addGameObject(new PowerUpLevens(this),this.getSpeler().getX(),this.getSpeler().getY()-this.getSpeler().getHeight());
+		this.addGameObject(new PowerUpLevens(this), this.getSpeler().getX(),
+				this.getSpeler().getY() - this.getSpeler().getHeight());
 
 //		if (random >= (double)0.33 && random < 0.66) {
 //			addGameObject(new PowerUpStruik(this),x,y);
@@ -212,51 +220,22 @@ public class AfrikaAvontuur extends GameEngine {
 	}
 	
 	public void tekenLevens() {
-		Dashboard levens  = new Dashboard(75, 0, 200, barHoogte);
-        levensText = new TextObject("Levens:" + levensSpeler, 18);
-        levens.addGameObject(levensText);
-        addDashboard(levens);
+		Dashboard levens = new Dashboard(75, 0, 200, barHoogte);
+		levensText = new TextObject("Levens:" + levensSpeler, 18);
+		levens.addGameObject(levensText);
+		addDashboard(levens);
 	}
-	public void updateLevens() {
-		levensText.setText("Levens:" + levensSpeler);
+
+	public void tekenEindscherm() {
+		leegGame();
+		Dashboard eindscherm = new Dashboard(200, 200, 250, 20);
+		eindText = new TextObject("ScoreZ:" + this.score, 18);
+		eindscherm.addGameObject(eindText);
+		addDashboard(eindscherm);
 	}
 	
 	public void leegGame() {
 		deleteAllGameOBjects();
 	}
 	
-	private void genereerPoep() {
-		Random r = new Random();
-		Poep p = new Poep(this);
-		GameObject o = this.apenLevend().get(r.nextInt(this.apenLevend().size()));
-		addGameObject(p, o.getX(), o.getY());
-	}
-	
-	private ArrayList<GameObject> apenLevend() {
-		ArrayList<GameObject> go = new ArrayList<GameObject>();
-		for(int i = 0; i < this.normaalApen.length; i++ ) {
-			if(this.normaalApen[i] != null) {
-				go.add((GameObject) normaalApen[i]);
-			}		
-		}
-		for(int i = 0; i < this.coolApen.length; i++ ) {
-			if(this.coolApen[i] != null) {
-				go.add((GameObject) coolApen[i]);
-			}
-			
-		}
-		for(int i = 0; i < this.kabouterApen.length; i++ ) {
-			if(this.kabouterApen[i] != null) {
-				go.add((GameObject) kabouterApen[i]);
-			}
-			
-		}
-		for(int i = 0; i < this.winterApen.length; i++ ) {
-			if(this.winterApen[i] != null) {
-				go.add((GameObject) winterApen[i]);
-			}
-			
-		}
-		return go;
-	}
 }
