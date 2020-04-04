@@ -7,8 +7,10 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @SuppressWarnings("serial")
 public class AfrikaAvontuur extends GameEngine {
@@ -72,6 +74,8 @@ public class AfrikaAvontuur extends GameEngine {
 	@Override
 	public void update() {
 		this.updateHighscore();
+		this.updateLevens();
+		this.genereerPoep();
 	}
 	
 	public void tekenInfoveld() {
@@ -213,9 +217,46 @@ public class AfrikaAvontuur extends GameEngine {
         levens.addGameObject(levensText);
         addDashboard(levens);
 	}
+	public void updateLevens() {
+		levensText.setText("Levens:" + levensSpeler);
+	}
 	
 	public void leegGame() {
 		deleteAllGameOBjects();
 	}
 	
+	private void genereerPoep() {
+		Random r = new Random();
+		Poep p = new Poep(this);
+		GameObject o = this.apenLevend().get(r.nextInt(this.apenLevend().size()));
+		addGameObject(p, o.getX(), o.getY());
+	}
+	
+	private ArrayList<GameObject> apenLevend() {
+		ArrayList<GameObject> go = new ArrayList<GameObject>();
+		for(int i = 0; i < this.normaalApen.length; i++ ) {
+			if(this.normaalApen[i] != null) {
+				go.add((GameObject) normaalApen[i]);
+			}		
+		}
+		for(int i = 0; i < this.coolApen.length; i++ ) {
+			if(this.coolApen[i] != null) {
+				go.add((GameObject) coolApen[i]);
+			}
+			
+		}
+		for(int i = 0; i < this.kabouterApen.length; i++ ) {
+			if(this.kabouterApen[i] != null) {
+				go.add((GameObject) kabouterApen[i]);
+			}
+			
+		}
+		for(int i = 0; i < this.winterApen.length; i++ ) {
+			if(this.winterApen[i] != null) {
+				go.add((GameObject) winterApen[i]);
+			}
+			
+		}
+		return go;
+	}
 }

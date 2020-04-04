@@ -23,17 +23,27 @@ public class KabouterAap extends SpriteObject implements IApen, ICollidableWithG
 	public void geraaktActie() {
 		telPuntenOp();
 		double random = Math.random();
+		removeFromArray();
 		if (random < 0.33) {
 			wereld.maakPowerUpAan(this.x, this.y);
 		}
 	}
 
+	private void removeFromArray() {                               
+		for (int i = 0; i < wereld.getKabouterApen().length; i++) { 
+			if (wereld.getKabouterApen()[i] == this) {              
+				wereld.getKabouterApen()[i] = null;                 
+			}                                                      
+		}                                                          
+	}                                                              
+	
 	public void telPuntenOp() {
 		this.wereld.setScore(this.wereld.getScore() + this.punten);
 	}
 
 	@Override
 	public void update() {
+		
 		if(moveRight) {
 			this.x = this.x + this.speed;
 			this.movement = this.movement + this.speed;

@@ -14,12 +14,10 @@ public class PowerUpLevens extends SpriteObject implements ICollidableWithGameOb
 	public PowerUpLevens(AfrikaAvontuur wereld) {
 		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("Hart.png")));
 		this.wereld = wereld;
-		System.out.println("poweruplevens");
 	}
 
 	@Override
 	public void update() {
-		System.out.println("X: "+this.x+" Y: "+this.y);
 	}
 
 	@Override

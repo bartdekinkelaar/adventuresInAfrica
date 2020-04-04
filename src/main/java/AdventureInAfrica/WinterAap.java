@@ -22,12 +22,21 @@ public class WinterAap extends SpriteObject implements IApen, ICollidableWithGam
 	@Override
 	public void geraaktActie() {
 		telPuntenOp();
+		removeFromArray();
 		double random = Math.random();
 		if (random < 0.33) {
 			wereld.maakPowerUpAan(this.x, this.y);
 		}
 	}
 
+	private void removeFromArray() {                               
+		for (int i = 0; i < wereld.getWinterApen().length; i++) { 
+			if (wereld.getWinterApen()[i] == this) {              
+				wereld.getWinterApen()[i] = null;                 
+			}                                                      
+		}                                                          
+	}                                                              
+	
 	public void telPuntenOp() {
 		this.wereld.setScore(this.wereld.getScore() + this.punten);
 	}
