@@ -1,5 +1,4 @@
 package AdventureInAfrica;
-import nl.han.ica.oopd.waterworld.Banaan;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 import java.util.Timer;
