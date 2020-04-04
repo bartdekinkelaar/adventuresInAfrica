@@ -1,10 +1,13 @@
 package AdventureInAfrica;
 
+import java.util.List;
+
+import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import processing.core.PGraphics;
 
-public class Struik extends GameObject {
+public class Struik extends GameObject implements ICollidableWithGameObjects{
 	AfrikaAvontuur wereld;
 	private StruikSprite struik;
 	private Sprite fstruik1;
@@ -61,5 +64,15 @@ public class Struik extends GameObject {
 
 	public void wordtGeraakt() {
 		aantalKeerGeraakt++;
+	}
+
+	@Override
+	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
+		for (GameObject go : collidedGameObjects) {
+			if (go instanceof Poep) {
+				this.wordtGeraakt();
+				wereld.deleteGameObject(go);
+			}
+		}
 	}
 }

@@ -1,35 +1,17 @@
 package AdventureInAfrica;
-import java.util.List;
-import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
-import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 
-public class Poep extends SpriteObject implements ICollidableWithGameObjects{
-    private AfrikaAvontuur wereld;
-    private float snelheid;
-    private float richting;
+public class Poep extends SpriteObject {
+    private float snelheid = 7;
+    private float richting = 180;
 
     public Poep(AfrikaAvontuur wereld) {
-        super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("poep.png")));
-		this.wereld = wereld;
-    }
-
-    @Override
-    public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
-        for (GameObject go: collidedGameObjects) {
-            if (go instanceof Speler) {
-                wereld.deleteGameObject(this);
-            }
-            if (go instanceof Struik) {
-                wereld.deleteGameObject(this);
-            }
-        }
+        super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("Poep.png")));
     }
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		setDirectionSpeed(this.richting,this.snelheid);		
 	}
 }

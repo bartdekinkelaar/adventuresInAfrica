@@ -22,11 +22,8 @@ public class NormaalAap extends SpriteObject implements IApen, ICollidableWithGa
 	@Override
 	public void geraaktActie() {
 		telPuntenOp();
-		System.out.println(wereld.getScore());
-		double random = Math.random();
-		if (random < 0.33) {
-			wereld.maakPowerUpAan(this.x, this.y);
-		}
+		wereld.maakPowerUpAan(this.x, this.y);
+
 	}
 
 	public void telPuntenOp() {

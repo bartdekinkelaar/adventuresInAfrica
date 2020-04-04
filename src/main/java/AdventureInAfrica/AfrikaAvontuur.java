@@ -8,6 +8,7 @@ import nl.han.ica.oopg.objects.SpriteObject;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class AfrikaAvontuur extends GameEngine {
@@ -120,16 +121,14 @@ public class AfrikaAvontuur extends GameEngine {
 
 	// gebruikt wanneer een aap doodgaat
 	public void maakPowerUpAan(float x, float y) {
-		double random = Math.random();
-		if (random < 0.33) {
-			addGameObject(new PowerUpLevens(this),x,y);
-		}
-		if (random >= 0.33 && random < 0.66) {
-			addGameObject(new PowerUpStruik(this),x,y);
-		}
-		if (random >= 0.66) {
-			addGameObject(new PowerUpRapid(this),x,y);
-		}
+			this.addGameObject(new PowerUpLevens(this),this.getSpeler().getX(),this.getSpeler().getY()-this.getSpeler().getHeight());
+
+//		if (random >= (double)0.33 && random < 0.66) {
+//			addGameObject(new PowerUpStruik(this),x,y);
+//		}
+//		if (random >= (double)0.66) {
+//			addGameObject(new PowerUpRapid(this),x,y);
+//		}
 	}
 
 	public void activeerPowerUpRapid() {
@@ -218,4 +217,5 @@ public class AfrikaAvontuur extends GameEngine {
 	public void leegGame() {
 		deleteAllGameOBjects();
 	}
+	
 }

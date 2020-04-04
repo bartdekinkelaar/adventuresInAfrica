@@ -12,15 +12,14 @@ public class PowerUpLevens extends SpriteObject implements ICollidableWithGameOb
 
 	
 	public PowerUpLevens(AfrikaAvontuur wereld) {
-		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("struik1.png")));
+		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("Hart.png")));
 		this.wereld = wereld;
-		this.setDirectionSpeed(180,40);   
+		System.out.println("poweruplevens");
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("X: "+this.x+" Y: "+this.y);
 	}
 
 	@Override
@@ -34,6 +33,8 @@ public class PowerUpLevens extends SpriteObject implements ICollidableWithGameOb
 		for (GameObject go: collidedGameObjects) {
 			if (go instanceof Speler) {				
 				this.powerUpActie();
+				System.out.println("trigger");
+
 			}
 		}		
 	}

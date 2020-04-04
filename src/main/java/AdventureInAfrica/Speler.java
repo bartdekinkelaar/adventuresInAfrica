@@ -1,9 +1,14 @@
 package AdventureInAfrica;
+
+import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
+import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
+
+import java.util.List;
 import java.util.Timer;
 
-public class Speler extends SpriteObject {
+public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 	private AfrikaAvontuur wereld;
 	public Timer schietTimer;
 	long start;
@@ -30,7 +35,7 @@ public class Speler extends SpriteObject {
 			setX(0 - getWidth());
 		}
 	}
-	
+
 	@SuppressWarnings("static-access")
 	public void keyPressed(int keyCode, char key) {
 		final int speed = 5;
@@ -64,7 +69,7 @@ public class Speler extends SpriteObject {
 				laatsteSchot = end;
 				System.out.println("geschoten");
 				end = start;
-	            this.wereld.addGameObject(new Banaan(wereld),this.x+this.getWidth()/2,this.y+this.getHeight());
+				this.wereld.addGameObject(new Banaan(wereld), this.x + this.getWidth() / 2, this.y + this.getHeight());
 			}
 		}
 		if (start != 0 && end != 0) {
@@ -80,7 +85,7 @@ public class Speler extends SpriteObject {
 					System.out.println(verschil + "seconden");
 					laatsteSchot = nieuwSchot;
 					System.out.println("geschoten");
-		            this.wereld.addGameObject(new Banaan(wereld),this.x,this.y);
+					this.wereld.addGameObject(new Banaan(wereld), this.x, this.y);
 
 				}
 			} else if (laatsteSchot == 0) {
@@ -103,6 +108,16 @@ public class Speler extends SpriteObject {
 			if (x < (getX() + getWidth()) && y < (getY() + getHeight())) {
 				System.out.println("Speler aangeklikt");
 //				wereld.leegGame();
+			}
+		}
+	}
+
+	@Override
+	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
+		for (GameObject go : collidedGameObjects) {
+			if (go instanceof Poep) {
+				wereld.setLevensSpeler(wereld.getLevensSpeler()-1);
+				wereld.deleteGameObject(go);
 			}
 		}
 	}
