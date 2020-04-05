@@ -19,6 +19,9 @@ public class NormaalAap extends SpriteObject implements IApen, ICollidableWithGa
 		this.wereld = wereld;
 	}
 
+	/** 
+	* This method is a resume of the most methods this class has.
+	*/
 	@Override
 	public void geraaktActie() {
 		telPuntenOp();
@@ -26,7 +29,10 @@ public class NormaalAap extends SpriteObject implements IApen, ICollidableWithGa
 		wereld.maakPowerUpAan(this.x, this.y);
 
 	}
-
+	
+	/** 
+	* This method removes the monkey from the array of monkey's in the game
+	*/
 	private void removeFromArray() {
 		for (int i = 0; i < wereld.getNormaalApen().length; i++) {
 			if (wereld.getNormaalApen()[i] == this) {
@@ -35,6 +41,9 @@ public class NormaalAap extends SpriteObject implements IApen, ICollidableWithGa
 		}
 	}
 
+	/** 
+	* This method added the points of the shot monkey to the current points
+	*/
 	public void telPuntenOp() {
 		this.wereld.setScore(this.wereld.getScore() + this.punten);
 	}

@@ -1,5 +1,4 @@
 package AdventureInAfrica;
-
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.GameObject;
@@ -16,7 +15,6 @@ public class AfrikaAvontuur extends GameEngine {
 	public WinterAap[] winterApen;
 	public Struik[] struiken;
 	public Speler speler;
-	public int scoreSpeler;
 	public int levensSpeler;
 	public int breedte = 1000;
 	public int hoogte = 800;
@@ -57,7 +55,6 @@ public class AfrikaAvontuur extends GameEngine {
 		this.kabouterApen = new KabouterAap[apenPerRij];
 		this.winterApen = new WinterAap[apenPerRij];
 		this.levensSpeler = 3;
-		this.scoreSpeler = 0;
 		this.schietSnelheid = 500;
 		this.barHoogte = 25;
 		this.poepInterval = 0.5;
@@ -99,18 +96,27 @@ public class AfrikaAvontuur extends GameEngine {
 		}
 	}
 
+	
+	/** 
+	* This makes the 'textbar' on top of the screen, with the highscore and the number of lives.
+	*/
 	public void tekenInfoveld() {
 		tekenHighscore();
 		tekenLevens();
 	}
-
-	// is hier zodat de setupgame niet te vol wordt
+	
+	/** 
+	* This method is added to keep the setupGame-part clean
+	*/
 	private void maakGameObjectenAan() {
 		maakApenAan();
 		maakStruikenAan();
 		maakSpelerAan();
 	}
-
+	
+	/** 
+	* This method makes new instances of the object "aap" (apes)
+	*/
 	private void maakApenAan() {
 		int n = -1;
 		for (int i = 0; i < apenPerRij; i++) {
@@ -128,6 +134,9 @@ public class AfrikaAvontuur extends GameEngine {
 		}
 	}
 
+	/** 
+	* This method makes new instances of the object "Struik" (bush)
+	*/
 	private void maakStruikenAan() {
 		this.struiken = new Struik[3];
 		this.struiken[0] = new Struik(this, 0, (float) (hoogte - (hoogte / 2.1)));
@@ -138,11 +147,17 @@ public class AfrikaAvontuur extends GameEngine {
 		this.struiken[2] = new Struik(this, 4 * breedte / 5, (float) (hoogte - (hoogte / 2.1)));
 	}
 
+	/** 
+	* This method makes the instance of the player and adds it into the game.
+	*/
 	private void maakSpelerAan() {
 		this.speler = new Speler(this);
 		addGameObject(this.speler, breedte - (breedte / 2) - (this.getWidth()), hoogte - (hoogte / 4) - barHoogte);
 	}
 
+	/** 
+	* This makes a new instance of a powerup and adds it into the current game
+	*/
 	// gebruikt wanneer een aap doodgaat
 	public void maakPowerUpAan(float x, float y) {
 		Random r = new Random();
@@ -216,13 +231,19 @@ public class AfrikaAvontuur extends GameEngine {
 		this.winterApen = winterApen;
 	}
 
+	/** 
+	* This method makes the text with the score on top of screen when the game starts 
+	*/
 	public void tekenHighscore() {
 		Dashboard highscore = new Dashboard(0, 0, 120, barHoogte);
 		scoreText = new TextObject("Score: " + this.score, 18);
 		highscore.addGameObject(scoreText);
 		addDashboard(highscore);
 	}
-
+	
+	/** 
+	* This method makes the text with the number of lives on top of screen when the game starts 
+	*/
 	public void tekenLevens() {
 		Dashboard levens = new Dashboard(75, 0, 200, barHoogte);
 		levensText = new TextObject("Levens:" + levensSpeler, 18);
@@ -230,6 +251,9 @@ public class AfrikaAvontuur extends GameEngine {
 		addDashboard(levens);
 	}
 
+	/** 
+	* This method shows the score after the game has been ended
+	*/
 	public void tekenEindscherm() {
 		Dashboard eindscherm = new Dashboard(175, 150, 600, 200);
 		eindText = new TextObject("Eindscore:" + this.score, 48);
@@ -237,19 +261,32 @@ public class AfrikaAvontuur extends GameEngine {
 		addDashboard(eindscherm);
 	}
 
+	/** 
+	* This method updates the highscore text on every moment, because it is used in update()
+	*/
 	public void updateHighscore() {
 		scoreText.setText("Score: " + this.score);
 	}
 
+	/** 
+	* When a player lost one life or received one, this method updated the text in the screen
+	*/
 	public void updateLevens() {
 		levensText.setText("Levens: " + levensSpeler);
 	}
 
+	/** 
+	* This method makes the whole game empty from objects except textObjects.
+	*/
 	public void leegGame() {
 		deleteAllGameOBjects();
 		tekenEindscherm();
 	}
-
+	
+	/** 
+	* This method generates the poop inside the game
+	* It ensures that the poop falls from random apes & at different moments
+	*/
 	private void genereerPoep() {
 		Random rand = new Random();
 		Poep p = new Poep(this);
@@ -310,16 +347,26 @@ public class AfrikaAvontuur extends GameEngine {
 		return go;
 	}
 
+	/** 
+	* This method returns the time between two moments, from nanoseconds, to seconds
+	*/
 	public long checkInterval(long tijdEen, long tijdTwee) {
 		return (tijdTwee - tijdEen) / 1000000000;
 	}
-
+	
+	/** 
+	* This method starts the powerup Rapid.
+	*/
 	public void startRapid(long powerupStart) {
 		powerUpActivatie = powerupStart;
 		schotInterval = 0.5;
 		rapidIsActive = true;
 	}
-
+	
+	/** 
+	* This method checks if the time for the Rapid-powerup has ended or not.
+	* And if the time has been ended, it resets the boolean which remember its powerup-state
+	*/
 	public void checkRapidTime() {
 		if (((System.nanoTime() - powerUpActivatie) / 1000000000) > 9) {
 			schotInterval = 1;

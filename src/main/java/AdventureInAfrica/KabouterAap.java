@@ -1,5 +1,4 @@
 package AdventureInAfrica;
-
 import java.util.List;
 
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
@@ -18,7 +17,10 @@ public class KabouterAap extends SpriteObject implements IApen, ICollidableWithG
 		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("KabouterAap.png")));
 		this.wereld = wereld; 
 	}
-
+	
+	/** 
+	* This method is a resume of the most methods this class has.
+	*/
 	@Override
 	public void geraaktActie() {
 		telPuntenOp();
@@ -28,7 +30,10 @@ public class KabouterAap extends SpriteObject implements IApen, ICollidableWithG
 			wereld.maakPowerUpAan(this.x, this.y);
 		}
 	}
-
+	
+	/** 
+	* This method removes the monkey from the array of monkey's in the game
+	*/
 	private void removeFromArray() {                               
 		for (int i = 0; i < wereld.getKabouterApen().length; i++) { 
 			if (wereld.getKabouterApen()[i] == this) {              
@@ -37,6 +42,9 @@ public class KabouterAap extends SpriteObject implements IApen, ICollidableWithG
 		}                                                          
 	}                                                              
 	
+	/** 
+	* This method added the points of the shot monkey to the current points
+	*/
 	public void telPuntenOp() {
 		this.wereld.setScore(this.wereld.getScore() + this.punten);
 	}

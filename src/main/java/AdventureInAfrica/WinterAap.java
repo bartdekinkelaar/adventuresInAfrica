@@ -19,6 +19,9 @@ public class WinterAap extends SpriteObject implements IApen, ICollidableWithGam
 		this.wereld = wereld;
 	}
 
+	/** 
+	* This method is a resume of the most methods this class has.
+	*/
 	@Override
 	public void geraaktActie() {
 		telPuntenOp();
@@ -29,6 +32,10 @@ public class WinterAap extends SpriteObject implements IApen, ICollidableWithGam
 		}
 	}
 
+	
+	/** 
+	* This method removes the monkey from the array of monkey's in the game
+	*/
 	private void removeFromArray() {                               
 		for (int i = 0; i < wereld.getWinterApen().length; i++) { 
 			if (wereld.getWinterApen()[i] == this) {              
@@ -36,7 +43,10 @@ public class WinterAap extends SpriteObject implements IApen, ICollidableWithGam
 			}                                                      
 		}                                                          
 	}                                                              
-	
+
+	/** 
+	* This method added the points of the shot monkey to the current points
+	*/
 	public void telPuntenOp() {
 		this.wereld.setScore(this.wereld.getScore() + this.punten);
 	}

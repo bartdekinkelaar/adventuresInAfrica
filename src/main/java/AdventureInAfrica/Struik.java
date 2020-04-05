@@ -45,7 +45,10 @@ public class Struik extends GameObject implements ICollidableWithGameObjects{
 		this.struik = new StruikSprite(fstruik1,this);
 		wereld.addGameObject(this.struik, this.x, this.y);
 	}
-
+	
+	/** 
+	* This is the method for if the bush gets attacked by poop from the apes
+	*/
 	public void wordtGeraakt() {
 		aantalKeerGeraakt++;
 		if (aantalKeerGeraakt == 0) {

@@ -49,6 +49,9 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 		}
 	}
 
+	/** 
+	* This method checks if the interval between two shootings is above the minimum-interval 
+	*/
 	public void controleerSchot() {
 		if (start == 0 && end == 0) {
 			start = System.nanoTime();
@@ -81,7 +84,9 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 			}
 		}
 	}
-
+	/** 
+	* This sets the time from two moments (the interval) from nanoseconds to round seconds.
+	*/
 	public void checkIntervalSchieten(long tijdEen, long tijdTwee) {
 		verschil = (tijdTwee - tijdEen) / 1000000000;
 	}

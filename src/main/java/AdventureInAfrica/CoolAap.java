@@ -18,6 +18,9 @@ public class CoolAap extends SpriteObject implements IApen, ICollidableWithGameO
 		this.wereld = wereld;
 	}
 
+	/** 
+	* This method is a resume of the most methods this class has.
+	*/
 	@Override
 	public void geraaktActie() {
 		telPuntenOp();
@@ -28,10 +31,16 @@ public class CoolAap extends SpriteObject implements IApen, ICollidableWithGameO
 		}
 	}
 
+	/** 
+	* This method added the points of the shot monkey to the current points
+	*/
 	public void telPuntenOp() {
 		this.wereld.setScore(this.wereld.getScore() + this.punten);
 	}
 	
+	/** 
+	* This method removes the monkey from the array of monkey's in the game
+	*/
 	private void removeFromArray() {                               
 		for (int i = 0; i < wereld.getCoolApen().length; i++) { 
 			if (wereld.getCoolApen()[i] == this) {              
@@ -54,6 +63,7 @@ public class CoolAap extends SpriteObject implements IApen, ICollidableWithGameO
 			moveRight = !moveRight;
 		}
 	}
+	
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		for (GameObject go : collidedGameObjects) {
