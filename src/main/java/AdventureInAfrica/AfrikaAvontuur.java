@@ -83,17 +83,17 @@ public class AfrikaAvontuur extends GameEngine {
 		this.updateHighscore();
 		this.updateLevens();
 
-		if (aantalApen > 1) {
+		if (this.apenLevend().size() > 1) {
 			this.genereerPoep();
 		}
 
-		if (aantalApen < 16) {
+		if (this.apenLevend().size() < 16 && this.apenLevend().size() > 8) {
 			poepInterval = 0.3;
 		}
-		if (aantalApen < 8) {
-			poepInterval = 0.2;
+		if (this.apenLevend().size() <= 8) {
+			poepInterval = 0.05;
 		}
-		if (aantalApen == 0 || levensSpeler == 0) {
+		if (this.apenLevend().size() == 0 || levensSpeler == 0) {
 			leegGame();
 		}
 		if (rapidIsActive == true) {
@@ -254,7 +254,7 @@ public class AfrikaAvontuur extends GameEngine {
 
 	private void genereerPoep() {
 		Random rand = new Random();
-		Poep p = new Poep(this);
+		Poep p = new Poep(this);		
 		GameObject o = this.apenLevend().get(rand.nextInt(this.apenLevend().size()));
 		if (start == 0 && eind == 0) {
 			start = System.nanoTime();
