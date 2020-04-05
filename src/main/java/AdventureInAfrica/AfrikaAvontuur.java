@@ -46,6 +46,8 @@ public class AfrikaAvontuur extends GameEngine {
 	public long laatstePoep;
 	public long nieuwPoep;
 	public double poepInterval;
+	public long powerUpStart;
+	public long powerUpTime;
 
 	public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
 
@@ -69,6 +71,7 @@ public class AfrikaAvontuur extends GameEngine {
 		this.schietSnelheid = 500;
 		this.barHoogte = 25;
 		this.poepInterval = 0.5;
+		speler.schotInterval = 1.0;
 
 		int worldWidth = breedte;
 		int worldHeight = hoogte;
@@ -150,12 +153,12 @@ public class AfrikaAvontuur extends GameEngine {
 	}
 
 	public void activeerPowerUpRapid() {
-		// m.b.v. Timer
-	}
-
-	// wordt aangeroepen door speler wss
-	public void schietBanaanAf() {
-
+		long activatiePowerUp = System.nanoTime();
+		powerUpTime = checkInterval(activatiePowerUp, powerUpStart);
+		while(powerUpTime < 10) {
+			speler.schotInterval = 0.5;
+			System.out.println("Rapid powerup actief");
+		}
 	}
 
 	public Speler getSpeler() {
@@ -258,7 +261,7 @@ public class AfrikaAvontuur extends GameEngine {
 		if (start != 0 && eind == 0) {
 			eind = start;
 			start = System.nanoTime();
-			checkInterval(eind, start);
+			verschil = checkInterval(eind, start);
 			if (verschil > poepInterval) {
 
 				addGameObject(p, o.getX(), o.getY());
@@ -271,7 +274,7 @@ public class AfrikaAvontuur extends GameEngine {
 			checkInterval(eind, start);
 			if (laatstePoep != 0) {
 				nieuwPoep = start;
-				checkInterval(laatstePoep, nieuwPoep);
+				verschil = checkInterval(laatstePoep, nieuwPoep);
 				if (verschil > 1) {
 					System.out.println("Laatste schot:" + laatstePoep);
 					System.out.println("Nieuwste schot:" + nieuwPoep);
@@ -312,7 +315,18 @@ public class AfrikaAvontuur extends GameEngine {
 		return go;
 	}
 
-	public void checkInterval(long tijdEen, long tijdTwee) {
-		verschil = (tijdTwee - tijdEen) / 1000000000;
+	public long checkInterval(long tijdEen, long tijdTwee) {
+		return (tijdTwee - tijdEen) / 1000000000;
 	}
+	
+//	public void plaatsPowerUp() {
+//		if(aantalApen % 5 == 0 && aantalApen > 0) {
+//			Random randPower = new Random();
+//			int randomNum = randPower.nextInt(3-1);
+//			if(randomNum == 1) {
+//				
+//			}
+//			
+//		}
+//	}
 }

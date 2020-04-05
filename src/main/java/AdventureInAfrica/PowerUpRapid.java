@@ -1,5 +1,4 @@
 package AdventureInAfrica;
-
 import java.util.List;
 
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
@@ -12,20 +11,18 @@ public class PowerUpRapid extends SpriteObject implements ICollidableWithGameObj
 	private AfrikaAvontuur wereld;
 
 	public PowerUpRapid(AfrikaAvontuur wereld) {
-		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("struik1.png")));
+		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("gemYellow.png")));
 		this.wereld = wereld;
 		this.setDirectionSpeed(180, 40);
 	}
 
 	@Override
 	public void update() {
-
 	}
 
 	@Override
 	public void draw(PGraphics g) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -35,13 +32,12 @@ public class PowerUpRapid extends SpriteObject implements ICollidableWithGameObj
 				this.powerUpActie();
 			}
 		}
-
 	}
 
 	@Override
 	public void powerUpActie() {
+		wereld.powerUpStart = System.nanoTime();
 		this.wereld.activeerPowerUpRapid();
 		this.wereld.deleteGameObject(this);
 	}
-
 }

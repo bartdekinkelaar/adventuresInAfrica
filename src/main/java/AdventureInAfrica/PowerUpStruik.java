@@ -11,7 +11,7 @@ public class PowerUpStruik extends SpriteObject implements ICollidableWithGameOb
 	private AfrikaAvontuur wereld;
 	
 	public PowerUpStruik(AfrikaAvontuur wereld) {
-		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("struik1.png")));
+		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("gemGreen.png")));
 		this.wereld = wereld;
 		this.setDirectionSpeed(180,40);   
 	}
