@@ -2,8 +2,11 @@ package AdventureInAfrica;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.GameObject;
+import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
+import processing.core.PImage;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,6 +38,7 @@ public class AfrikaAvontuur extends GameEngine {
 	public long powerUpActivatie;
 	public long currentTime;
 	public boolean rapidIsActive;
+	public PImage achtergrond;
 
 	public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
 
@@ -55,6 +59,8 @@ public class AfrikaAvontuur extends GameEngine {
 		this.barHoogte = 25;
 		this.poepInterval = 0.5;
 		this.schotInterval = 1.0;
+		this.achtergrond = loadImage(this.MEDIA_URL.concat("Achtergrondje.png"));
+		
 
 		int worldWidth = breedte;
 		int worldHeight = hoogte;
@@ -62,7 +68,7 @@ public class AfrikaAvontuur extends GameEngine {
 		maakGameObjectenAan();
 		View view = new View(worldWidth, worldHeight);
 		setView(view);
-		view.setBackground(240, 240, 240);
+		view.setBackground(achtergrond);
 		size(worldWidth, worldHeight);
 		tekenInfoveld();
 	}
@@ -123,10 +129,10 @@ public class AfrikaAvontuur extends GameEngine {
 		}
 		for (int k = 0; k < apenPerRij; k++) {
 			n++;
-			addGameObject(winterApen[n], (breedte / apenPerRij) * k, 0);
-			addGameObject(kabouterApen[n], (breedte / apenPerRij) * k, (hoogte / 9));
-			addGameObject(coolApen[n], (breedte / apenPerRij) * k, (hoogte / 9) * 2);
-			addGameObject(normaalApen[n], (breedte / apenPerRij) * k, (hoogte / 9) * 3);
+			addGameObject(winterApen[n], (breedte / apenPerRij) * k, barHoogte);
+			addGameObject(kabouterApen[n], (breedte / apenPerRij) * k, (hoogte / 9) + barHoogte);
+			addGameObject(coolApen[n], (breedte / apenPerRij) * k, ((hoogte / 9) * 2) + barHoogte);
+			addGameObject(normaalApen[n], (breedte / apenPerRij) * k, ((hoogte / 9) * 3) + barHoogte);
 		}
 	}
 
