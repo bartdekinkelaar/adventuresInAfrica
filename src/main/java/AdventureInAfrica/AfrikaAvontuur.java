@@ -83,17 +83,17 @@ public class AfrikaAvontuur extends GameEngine {
 		this.updateHighscore();
 		this.updateLevens();
 
-		if (aantalApen > 1) {
+		if (this.apenLevend().size() > 0) {
 			this.genereerPoep();
 		}
 
-		if (aantalApen < 16) {
+		if (this.apenLevend().size() < 16) {
 			poepInterval = 0.3;
 		}
-		if (aantalApen < 8) {
+		if (this.apenLevend().size() < 8) {
 			poepInterval = 0.2;
 		}
-		if (aantalApen == 0 || levensSpeler == 0) {
+		if (this.apenLevend().size() == 0 || levensSpeler == 0) {
 			leegGame();
 		}
 		if (rapidIsActive == true) {
