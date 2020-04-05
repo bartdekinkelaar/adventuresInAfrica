@@ -26,18 +26,12 @@ public class AfrikaAvontuur extends GameEngine {
 	public int hoogte = 800;
 	public String statusSpel;
 	public float score = 0;
-	public long tijdPowerUpRapidActief;
-	public long laatsteTijdSchietenBanaan;
-	public long cooldownBanaan;
-	public long cooldownPoep;
 	public GameObject hartje;
-	public Sprite logoImage;
-	public SpriteObject logo;
 	public TextObject scoreText;
 	public TextObject levensText;
 	public TextObject eindText;
-	public int schietSnelheid;
 	public int barHoogte;
+	public int schietSnelheid;
 	public int apenPerRij;
 	public int aantalApen;
 	public long verschil;
@@ -47,18 +41,17 @@ public class AfrikaAvontuur extends GameEngine {
 	public long nieuwPoep;
 	public double poepInterval;
 	public double schotInterval;
-	public long powerUpStart;
-	public long powerUpTime;
+	public long powerUpActivatie;
+	public long currentTime;
+	public boolean rapidIsActive;
 
 	public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
 
 	public static void main(String[] args) {
 		AfrikaAvontuur hw = new AfrikaAvontuur();
-
 		hw.runSketch();
 	}
 
-	// test
 	@Override
 	public void setupGame() {
 		this.apenPerRij = 5;
@@ -89,7 +82,10 @@ public class AfrikaAvontuur extends GameEngine {
 	public void update() {
 		this.updateHighscore();
 		this.updateLevens();
-		this.genereerPoep();
+
+		if (aantalApen > 1) {
+			this.genereerPoep();
+		}
 
 		if (aantalApen < 16) {
 			poepInterval = 0.3;
@@ -99,6 +95,9 @@ public class AfrikaAvontuur extends GameEngine {
 		}
 		if (aantalApen == 0 || levensSpeler == 0) {
 			leegGame();
+		}
+		if (rapidIsActive == true) {
+			checkRapidTime();
 		}
 	}
 
@@ -110,7 +109,6 @@ public class AfrikaAvontuur extends GameEngine {
 	// is hier zodat de setupgame niet te vol wordt
 	private void maakGameObjectenAan() {
 		maakApenAan();
-		maakStruikenAan();
 		maakStruikenAan();
 		maakSpelerAan();
 	}
@@ -150,27 +148,17 @@ public class AfrikaAvontuur extends GameEngine {
 	// gebruikt wanneer een aap doodgaat
 	public void maakPowerUpAan(float x, float y) {
 		Random r = new Random();
-		if(r.nextInt(3)!=1) {
+		if (r.nextInt(3) != 1) {
 			int rI = r.nextInt(3);
-			if(rI == 0) {
-				addGameObject(new PowerUpLevens(this),x,y);
+			if (rI == 0) {
+				addGameObject(new PowerUpLevens(this), x, y);
 			}
-			if(rI == 1) {
-				addGameObject(new PowerUpStruik(this),x,y);
+			if (rI == 1) {
+				addGameObject(new PowerUpStruik(this), x, y);
 			}
-			if(rI == 2) {
-				addGameObject(new PowerUpRapid(this),x,y);
+			if (rI == 2) {
+				addGameObject(new PowerUpRapid(this), x, y);
 			}
-		}
-	}
-
-	public void activeerPowerUpRapid() {
-		long activatiePowerUp = System.nanoTime();
-		powerUpTime = checkInterval(activatiePowerUp, powerUpStart);
-		while(powerUpTime < 10) {
-			powerUpTime = checkInterval(activatiePowerUp, powerUpStart);
-			schotInterval = 0.5;
-			System.out.println("Rapid powerup actief");
 		}
 	}
 
@@ -289,11 +277,7 @@ public class AfrikaAvontuur extends GameEngine {
 				nieuwPoep = start;
 				verschil = checkInterval(laatstePoep, nieuwPoep);
 				if (verschil > 1) {
-					System.out.println("Laatste schot:" + laatstePoep);
-					System.out.println("Nieuwste schot:" + nieuwPoep);
-					System.out.println(verschil + "seconden");
 					laatstePoep = nieuwPoep;
-					System.out.println("geschoten");
 					addGameObject(new Poep(this), o.getX(), o.getY());
 
 				}
@@ -331,15 +315,17 @@ public class AfrikaAvontuur extends GameEngine {
 	public long checkInterval(long tijdEen, long tijdTwee) {
 		return (tijdTwee - tijdEen) / 1000000000;
 	}
-	
-//	public void plaatsPowerUp() {
-//		if(aantalApen % 5 == 0 && aantalApen > 0) {
-//			Random randPower = new Random();
-//			int randomNum = randPower.nextInt(3-1);
-//			if(randomNum == 1) {
-//				
-//			}
-//			
-//		}
-//	}
+
+	public void startRapid(long powerupStart) {
+		powerUpActivatie = powerupStart;
+		schotInterval = 0.5;
+		rapidIsActive = true;
+	}
+
+	public void checkRapidTime() {
+		if (((System.nanoTime() - powerUpActivatie) / 1000000000) > 9) {
+			schotInterval = 1;
+			rapidIsActive = false;
+		}
+	}
 }

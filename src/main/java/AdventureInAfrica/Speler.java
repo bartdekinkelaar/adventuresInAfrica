@@ -1,10 +1,8 @@
 package AdventureInAfrica;
-
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
-
 import java.util.List;
 import java.util.Timer;
 
@@ -18,8 +16,6 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 	long verschil;
 
 	public Speler(AfrikaAvontuur wereld) {
-		// Met `.concat()` plak je 2 strings aan elkaar.
-		// De methode returned een nieuwe String terug.
 		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("Vreek.png")));
 		this.wereld = wereld;
 		schietTimer = new Timer();
@@ -62,11 +58,7 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 			start = System.nanoTime();
 			checkIntervalSchieten(end, start);
 			if (verschil > wereld.schotInterval) {
-				System.out.println("Laatste schot:" + laatsteSchot);
-				System.out.println("Nieuwste schot:" + nieuwSchot);
-				System.out.println(verschil + "seconden");
 				laatsteSchot = end;
-				System.out.println("geschoten");
 				end = start;
 				this.wereld.addGameObject(new Banaan(wereld), this.x + this.getWidth() / 2, this.y + this.getHeight());
 			}
@@ -79,11 +71,7 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 				nieuwSchot = start;
 				checkIntervalSchieten(laatsteSchot, nieuwSchot);
 				if (verschil > wereld.schotInterval) {
-					System.out.println("Laatste schot:" + laatsteSchot);
-					System.out.println("Nieuwste schot:" + nieuwSchot);
-					System.out.println(verschil + "seconden");
 					laatsteSchot = nieuwSchot;
-					System.out.println("geschoten");
 					this.wereld.addGameObject(new Banaan(wereld), this.x, this.y);
 
 				}
@@ -96,20 +84,7 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 	public void checkIntervalSchieten(long tijdEen, long tijdTwee) {
 		verschil = (tijdTwee - tijdEen) / 1000000000;
 	}
-
-	public void updateLevens(int levensAantal) {
-		wereld.levensSpeler = levensAantal - 1;
-		wereld.updateHighscore();
-	}
-
-	public void mouseClicked(int x, int y, int button) {
-		if (x > getX() && y > getY()) {
-			if (x < (getX() + getWidth()) && y < (getY() + getHeight())) {
-				System.out.println("Speler aangeklikt");
-//				wereld.leegGame();
-			}
-		}
-	}
+	
 
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
@@ -119,11 +94,11 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 				wereld.deleteGameObject(go);
 			}
 			if (go instanceof PowerUpLevens) {
-				this.wereld.setLevensSpeler(3);				
+				this.wereld.setLevensSpeler(wereld.getLevensSpeler() + 1);				
 				wereld.deleteGameObject(go);
 			}
 			if (go instanceof PowerUpRapid) {
-				this.wereld.activeerPowerUpRapid();
+				this.wereld.startRapid(System.nanoTime());
 				wereld.deleteGameObject(go);
 			}
 			if (go instanceof PowerUpStruik) {
