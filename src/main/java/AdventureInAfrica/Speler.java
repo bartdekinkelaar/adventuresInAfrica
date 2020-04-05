@@ -16,7 +16,6 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 	long nieuwSchot;
 	long laatsteSchot;
 	long verschil;
-	double schotInterval;
 
 	public Speler(AfrikaAvontuur wereld) {
 		// Met `.concat()` plak je 2 strings aan elkaar.
@@ -62,7 +61,7 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 			end = start;
 			start = System.nanoTime();
 			checkIntervalSchieten(end, start);
-			if (verschil > schotInterval) {
+			if (verschil > wereld.schotInterval) {
 				System.out.println("Laatste schot:" + laatsteSchot);
 				System.out.println("Nieuwste schot:" + nieuwSchot);
 				System.out.println(verschil + "seconden");
@@ -79,7 +78,7 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 			if (laatsteSchot != 0) {
 				nieuwSchot = start;
 				checkIntervalSchieten(laatsteSchot, nieuwSchot);
-				if (verschil > schotInterval) {
+				if (verschil > wereld.schotInterval) {
 					System.out.println("Laatste schot:" + laatsteSchot);
 					System.out.println("Nieuwste schot:" + nieuwSchot);
 					System.out.println(verschil + "seconden");

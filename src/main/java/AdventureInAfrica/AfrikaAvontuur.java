@@ -46,6 +46,7 @@ public class AfrikaAvontuur extends GameEngine {
 	public long laatstePoep;
 	public long nieuwPoep;
 	public double poepInterval;
+	public double schotInterval;
 	public long powerUpStart;
 	public long powerUpTime;
 
@@ -71,7 +72,7 @@ public class AfrikaAvontuur extends GameEngine {
 		this.schietSnelheid = 500;
 		this.barHoogte = 25;
 		this.poepInterval = 0.5;
-		speler.schotInterval = 1.0;
+		this.schotInterval = 1.0;
 
 		int worldWidth = breedte;
 		int worldHeight = hoogte;
@@ -156,7 +157,7 @@ public class AfrikaAvontuur extends GameEngine {
 		long activatiePowerUp = System.nanoTime();
 		powerUpTime = checkInterval(activatiePowerUp, powerUpStart);
 		while(powerUpTime < 10) {
-			speler.schotInterval = 0.5;
+			schotInterval = 0.5;
 			System.out.println("Rapid powerup actief");
 		}
 	}
