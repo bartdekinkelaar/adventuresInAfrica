@@ -18,16 +18,13 @@ public class AfrikaAvontuur extends GameEngine {
 	public int levensSpeler;
 	public int breedte = 1000;
 	public int hoogte = 800;
-	public String statusSpel;
 	public float score = 0;
-	public GameObject hartje;
 	public TextObject scoreText;
 	public TextObject levensText;
 	public TextObject eindText;
 	public int barHoogte;
 	public int schietSnelheid;
 	public int apenPerRij;
-	public int aantalApen;
 	public long verschil;
 	public long start;
 	public long eind;
@@ -49,7 +46,6 @@ public class AfrikaAvontuur extends GameEngine {
 	@Override
 	public void setupGame() {
 		this.apenPerRij = 5;
-		this.aantalApen = apenPerRij * 4;
 		this.normaalApen = new NormaalAap[apenPerRij];
 		this.coolApen = new CoolAap[apenPerRij];
 		this.kabouterApen = new KabouterAap[apenPerRij];
@@ -173,10 +169,6 @@ public class AfrikaAvontuur extends GameEngine {
 				addGameObject(new PowerUpRapid(this), x, y);
 			}
 		}
-	}
-
-	public Speler getSpeler() {
-		return speler;
 	}
 
 	public Struik[] getStruiken() {

@@ -4,18 +4,12 @@ import java.util.List;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
-import nl.han.ica.oopg.objects.SpriteObject;
 
-public class KabouterAap extends SpriteObject implements IApen, ICollidableWithGameObjects {
-	private float punten = 10;
-	private AfrikaAvontuur wereld;
-	private boolean moveRight = true;
-	private float movement = 0;
-	private float speed = (float) 0.9;
+public class KabouterAap extends Aap implements IApen, ICollidableWithGameObjects {
+
 
 	KabouterAap(AfrikaAvontuur wereld) {
-		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("KabouterAap.png")));
-		this.wereld = wereld; 
+		super(wereld, 40,new Sprite(AfrikaAvontuur.MEDIA_URL.concat("KabouterAap.png")));
 	}
 	
 	/** 
