@@ -52,6 +52,7 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 	public void controleerSchot() {
 		if (start == 0 && end == 0) {
 			start = System.nanoTime();
+			this.wereld.addGameObject(new Banaan(wereld), this.x, this.y);
 		}
 		if (start != 0 && end == 0) {
 			end = start;
