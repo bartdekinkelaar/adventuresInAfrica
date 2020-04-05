@@ -40,12 +40,18 @@ public class AfrikaAvontuur extends GameEngine {
 	public int barHoogte;
 	public int apenPerRij;
 	public int aantalApen;
+	public long verschil;
+	public long start;
+	public long eind;
+	public long laatstePoep;
+	public long nieuwPoep;
+	public double poepInterval;
 
 	public static String MEDIA_URL = "src/main/java/AdventureInAfrica/media/";
 
 	public static void main(String[] args) {
 		AfrikaAvontuur hw = new AfrikaAvontuur();
-		
+
 		hw.runSketch();
 	}
 
@@ -62,6 +68,7 @@ public class AfrikaAvontuur extends GameEngine {
 		this.scoreSpeler = 0;
 		this.schietSnelheid = 500;
 		this.barHoogte = 25;
+		this.poepInterval = 0.5;
 
 		int worldWidth = breedte;
 		int worldHeight = hoogte;
@@ -79,7 +86,14 @@ public class AfrikaAvontuur extends GameEngine {
 		this.updateHighscore();
 		this.updateLevens();
 		this.genereerPoep();
-		if (aantalApen == 0) {
+
+		if (aantalApen < 16) {
+			poepInterval = 0.3;
+		}
+		if (aantalApen < 8) {
+			poepInterval = 0.2;
+		}
+		if (aantalApen == 0 || levensSpeler == 0) {
 			leegGame();
 		}
 	}
@@ -232,5 +246,73 @@ public class AfrikaAvontuur extends GameEngine {
 	public void leegGame() {
 		deleteAllGameOBjects();
 		tekenEindscherm();
+	}
+
+	private void genereerPoep() {
+		Random rand = new Random();
+		Poep p = new Poep(this);
+		GameObject o = this.apenLevend().get(rand.nextInt(this.apenLevend().size()));
+		if (start == 0 && eind == 0) {
+			start = System.nanoTime();
+		}
+		if (start != 0 && eind == 0) {
+			eind = start;
+			start = System.nanoTime();
+			checkInterval(eind, start);
+			if (verschil > poepInterval) {
+
+				addGameObject(p, o.getX(), o.getY());
+				start = System.nanoTime();
+			}
+		}
+		if (start != 0 && eind != 0) {
+			eind = start;
+			start = System.nanoTime();
+			checkInterval(eind, start);
+			if (laatstePoep != 0) {
+				nieuwPoep = start;
+				checkInterval(laatstePoep, nieuwPoep);
+				if (verschil > 1) {
+					System.out.println("Laatste schot:" + laatstePoep);
+					System.out.println("Nieuwste schot:" + nieuwPoep);
+					System.out.println(verschil + "seconden");
+					laatstePoep = nieuwPoep;
+					System.out.println("geschoten");
+					addGameObject(new Poep(this), o.getX(), o.getY());
+
+				}
+			} else if (laatstePoep == 0) {
+				laatstePoep = start;
+			}
+		}
+	}
+
+	private ArrayList<GameObject> apenLevend() {
+		ArrayList<GameObject> go = new ArrayList<GameObject>();
+		for (int i = 0; i < this.normaalApen.length; i++) {
+			if (this.normaalApen[i] != null) {
+				go.add((GameObject) normaalApen[i]);
+			}
+		}
+		for (int i = 0; i < this.coolApen.length; i++) {
+			if (this.coolApen[i] != null) {
+				go.add((GameObject) coolApen[i]);
+			}
+		}
+		for (int i = 0; i < this.kabouterApen.length; i++) {
+			if (this.kabouterApen[i] != null) {
+				go.add((GameObject) kabouterApen[i]);
+			}
+		}
+		for (int i = 0; i < this.winterApen.length; i++) {
+			if (this.winterApen[i] != null) {
+				go.add((GameObject) winterApen[i]);
+			}
+		}
+		return go;
+	}
+
+	public void checkInterval(long tijdEen, long tijdTwee) {
+		verschil = (tijdTwee - tijdEen) / 1000000000;
 	}
 }
