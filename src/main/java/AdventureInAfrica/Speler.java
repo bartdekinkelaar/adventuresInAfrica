@@ -115,7 +115,21 @@ public class Speler extends SpriteObject implements ICollidableWithGameObjects {
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		for (GameObject go : collidedGameObjects) {
 			if (go instanceof Poep) {
-				wereld.setLevensSpeler(wereld.getLevensSpeler()-1);
+				wereld.setLevensSpeler(wereld.getLevensSpeler() - 1);
+				wereld.deleteGameObject(go);
+			}
+			if (go instanceof PowerUpLevens) {
+				this.wereld.setLevensSpeler(3);				
+				wereld.deleteGameObject(go);
+			}
+			if (go instanceof PowerUpRapid) {
+				this.wereld.activeerPowerUpRapid();
+				wereld.deleteGameObject(go);
+			}
+			if (go instanceof PowerUpStruik) {
+				this.wereld.getStruiken()[0].refresh();
+				this.wereld.getStruiken()[1].refresh();
+				this.wereld.getStruiken()[2].refresh();
 				wereld.deleteGameObject(go);
 			}
 		}

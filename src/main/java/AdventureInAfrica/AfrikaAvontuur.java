@@ -149,14 +149,26 @@ public class AfrikaAvontuur extends GameEngine {
 
 	// gebruikt wanneer een aap doodgaat
 	public void maakPowerUpAan(float x, float y) {
-		this.addGameObject(new PowerUpLevens(this), this.getSpeler().getX(),
-				this.getSpeler().getY() - this.getSpeler().getHeight());
+		Random r = new Random();
+		if(r.nextInt(3)!=1) {
+			int rI = r.nextInt(3);
+			if(rI == 0) {
+				addGameObject(new PowerUpLevens(this),x,y);
+			}
+			if(rI == 1) {
+				addGameObject(new PowerUpStruik(this),x,y);
+			}
+			if(rI == 2) {
+				addGameObject(new PowerUpRapid(this),x,y);
+			}
+		}
 	}
 
 	public void activeerPowerUpRapid() {
 		long activatiePowerUp = System.nanoTime();
 		powerUpTime = checkInterval(activatiePowerUp, powerUpStart);
 		while(powerUpTime < 10) {
+			powerUpTime = checkInterval(activatiePowerUp, powerUpStart);
 			schotInterval = 0.5;
 			System.out.println("Rapid powerup actief");
 		}

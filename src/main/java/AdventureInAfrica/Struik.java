@@ -42,6 +42,9 @@ public class Struik extends GameObject implements ICollidableWithGameObjects{
 
 	public void refresh() {
 		aantalKeerGeraakt = 0;
+		wereld.deleteGameObject(struik);
+		this.struik = new StruikSprite(fstruik1,this);
+		wereld.addGameObject(this.struik, this.x, this.y);
 	}
 
 	public void wordtGeraakt() {
