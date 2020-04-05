@@ -3,13 +3,9 @@ package AdventureInAfrica;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.GameObject;
-import nl.han.ica.oopg.objects.Sprite;
-import nl.han.ica.oopg.objects.SpriteObject;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("serial")
@@ -87,12 +83,14 @@ public class AfrikaAvontuur extends GameEngine {
 			this.genereerPoep();
 		}
 
-		if (this.apenLevend().size() < 16) {
+		if (this.apenLevend().size() <= 8) {
+			poepInterval = 0.15;
+		}
+
+		if (this.apenLevend().size() < 16 && this.apenLevend().size() > 8) {
 			poepInterval = 0.3;
 		}
-		if (this.apenLevend().size() < 8) {
-			poepInterval = 0.2;
-		}
+
 		if (this.apenLevend().size() == 0 || levensSpeler == 0) {
 			leegGame();
 		}
