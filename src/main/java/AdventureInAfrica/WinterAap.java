@@ -5,18 +5,11 @@ import java.util.List;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
-import nl.han.ica.oopg.objects.SpriteObject;
 
-public class WinterAap extends SpriteObject implements IApen, ICollidableWithGameObjects {
-	private float punten = 40;
-	private AfrikaAvontuur wereld;
-	private boolean moveRight = true;
-	private float movement = 0;
-	private float speed = (float) 0.9;
+public class WinterAap extends Aap implements IApen, ICollidableWithGameObjects {
 
 	WinterAap(AfrikaAvontuur wereld) {
-		super(new Sprite(AfrikaAvontuur.MEDIA_URL.concat("WinterAap.png")));
-		this.wereld = wereld;
+		super(wereld, 80,new Sprite(AfrikaAvontuur.MEDIA_URL.concat("WinterAap.png")));
 	}
 
 	@Override
